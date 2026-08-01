@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Merdeka - ChBotID</title>
-    <!-- Import Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&family=Inter:wght@400;600&family=EB+Garamond:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
-    <!-- Icon Support -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
@@ -50,64 +48,75 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
         .header-img { width: 100%; display: block; border-bottom: 4px solid var(--merah); }
-        
         .content { padding: 25px; color: #333; line-height: 1.6; }
 
-        /* Styling Spesifik Sesuai Permintaan */
         .title-gold { color: #d4af37; font-weight: 800; font-size: 1.4rem; text-align: center; display: block; }
         .text-italic { font-style: italic; margin: 20px 0; }
         .text-bold-italic { font-weight: bold; font-style: italic; display: block; margin: 15px 0; }
         .text-bold-green { color: var(--hijau); font-weight: bold; font-size: 1.2rem; }
         .text-bold { font-weight: bold; }
         
-        /* Tabel Peringkat & Detail */
         .data-table {
             width: 100%; border-collapse: collapse; margin: 15px 0;
             background: #fdfdfd; border: 1px solid #eee; border-radius: 8px; overflow: hidden;
         }
         .data-table td { padding: 12px 15px; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
         .data-table td:first-child { font-weight: bold; width: 40%; background: #fafafa; }
-
-        /* LaTeX Style untuk Sehan */
         .latex-style { font-family: 'EB Garamond', serif; font-weight: 700; color: var(--biru-tele); text-decoration: underline; }
-
-        /* Footer Support - Ukuran Rata */
-        .footer-support {
-            background: #f8f9fa; padding: 25px 15px; border-top: 1px solid #eee;
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
-        }
-        .support-badge {
-            text-decoration: none; padding: 12px; border-radius: 8px;
-            display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 12px; text-align: center; font-weight: 600;
-        }
-        
-        /* Variasi Badge Footer */
-        .bg-git-tele { background: #333; grid-column: span 2; display: flex; gap: 20px; }
-        .bg-blue-latex { background: var(--biru-tele); font-family: 'EB Garamond', serif; font-size: 15px; }
-        .bg-black-h4 { background: #000; font-size: 1.1rem; font-family: 'Poppins', sans-serif; font-weight: 700; }
-        .bg-gold-h2 { background: var(--emas); color: #000; font-size: 1.3rem; font-family: 'Poppins', sans-serif; font-weight: 800; }
-        .bg-red-bold { background: var(--merah); font-weight: 800; }
-        .bg-pink-italic { background: var(--pink); font-style: italic; font-family: 'EB Garamond', serif; }
-        .bg-standard { background: var(--biru-tele); }
 
         .btn-green-main {
             display: block; width: 100%; padding: 16px; background: var(--hijau);
             color: white !important; text-align: center; border-radius: 12px;
-            font-weight: 700; text-decoration: none; margin-top: 20px;
+            font-weight: 700; text-decoration: none; margin-bottom: 30px;
         }
+
+        /* --- UI/UX SUPPORT BLOCK --- */
+        .support-block {
+            background: #ededed; /* Ter-block background */
+            margin: 15px; padding: 25px 15px; border-radius: 25px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;
+            align-items: center; justify-items: center;
+        }
+
+        .logo-btn {
+            text-decoration: none; display: flex; align-items: center; justify-content: center;
+            text-align: center; color: white; font-size: 11px; font-weight: 700;
+            width: 80px; height: 80px; transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .logo-btn:active { transform: scale(0.9); }
+
+        /* Bentuk-Bentuk Unik */
+        .shape-circle { border-radius: 50%; width: 60px; height: 60px; font-size: 18px; }
+        .shape-hexagon { 
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); 
+            padding: 10px;
+        }
+        .shape-oval { border-radius: 50px; width: 90px; height: 50px; }
+        .shape-diamond { transform: rotate(45deg); width: 60px; height: 60px; }
+        .shape-diamond span { transform: rotate(-45deg); } /* Luruskan teks di diamond */
+
+        /* Warna & Font Spesifik */
+        .bg-git { background: #333; }
+        .bg-tele { background: var(--biru-tele); }
+        .bg-sambung { background: var(--biru-tele); font-family: 'EB Garamond', serif; font-size: 11px; }
+        .bg-drak { background: #000; font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700; }
+        .bg-official { background: var(--emas); color: #000; font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 800; }
+        .bg-botindo { background: var(--merah); font-weight: 800; }
+        .bg-syakilla { background: var(--pink); font-style: italic; font-family: 'EB Garamond', serif; font-size: 13px; }
+
     </style>
 </head>
 <body>
 
-    <!-- Intro -->
     <div id="overlay">
         <h1>🇮🇩MERDEKA🪖</h1>
         <p>Buka event untuk mengetahui informasi Seputar ChBotID</p>
         <button onclick="mulaiWeb()">BUKA SEKARANG</button>
     </div>
 
-    <!-- Audio -->
     <audio id="laguMerdeka" loop>
         <source src="https://archive.org/download/HariMerdeka/Hari%20Merdeka.mp3" type="audio/mpeg">
     </audio>
@@ -151,59 +160,66 @@
             <p style="font-size: 14px;">Pemenang yang tidak melakukan klaim pada batas waktu yang telah ditentukan dianggap mengundurkan diri dan hadiah dianggap hangus.</p>
 
             <div style="text-align:center; color:#ccc;">──────────────────────────────────────────</div>
-            <p class="text-bold" style="color:var(--pink)">💝 JADILAH DONATUR! Tambah Hadiah Pemenang!</p>
-            <div style="text-align:center; color:#ccc;">──────────────────────────────────────────</div>
-
-            <p style="font-size:14px;">Total hadiah yang dibagikan dapat bertambah besar apabila semakin banyak donatur yang berpartisipasi. Ayo ikut serta!</p>
-
-            <p class="text-bold">✨ Mengapa Menjadi Donatur?</p>
-            <div style="padding-left:15px; font-size:14px;">
-                • Berkontribusi langsung untuk hadiah pemain<br>
-                • Nama Anda bisa di-umumkan sebagai donatur<br>
-                • Dukungan Anda sangat berarti bagi komunitas<br>
-                • Cara mudah, cepat, dan aman
-            </div>
-
-            <p class="text-bold" style="margin-top:20px;">📩 Cara Menjadi Donatur:</p>
-            <div style="padding-left:15px; font-size:14px;">
-                1. Hubungi Owner melalui Telegram 👨‍💻 <a href="https://t.me/id_anda" class="latex-style">SEHAN</a><br>
+            <p class="text-bold" style="color:var(--pink)">💝 JADILAH DONATUR!</p>
+            <div style="padding-left:15px; font-size:14px; margin-bottom:20px;">
+                1. Hubungi Owner 👨‍💻 <a href="https://t.me/id_anda" class="latex-style">SEHAN</a><br>
                 2. Sampaikan niat dan nominal donasi Anda<br>
-                3. Lakukan pembayaran melalui QRIS yang disediakan<br>
-                4. Konfirmasi pembayaran kepada Owner<br>
-                5. Donasi akan langsung ditambahkan ke total hadiah! 🎁
+                3. Lakukan pembayaran melalui QRIS<br>
+                4. Konfirmasi pembayaran kepada Owner
             </div>
 
-            <p style="font-style:italic; font-size:13px; margin-top:15px;">💡 Berapa pun nominalnya, setiap donasi akan sangat berarti bagi para pemenang.</p>
-
-            <div style="text-align:center; color:#ccc; margin-top:30px;">──────────────────────────────────────────</div>
-            <p style="text-align:center; font-weight:bold;">Mari ramaikan Season 7 dan raih posisi teratas Anda! 🇮🇩</p>
+            <div style="text-align:center; color:#ccc;">──────────────────────────────────────────</div>
+            <p style="text-align:center; font-weight:bold;">Mari ramaikan Season 7! 🇮🇩</p>
             
-            <div style="text-align:center; margin-top:30px;">
+            <div style="text-align:center; margin-top:20px; margin-bottom:30px;">
                 <p style="margin:0; font-size:14px;">Salam hormat,</p>
                 <p class="latex-style" style="margin-top:5px;">Sehan SA-KA</p>
             </div>
 
             <a href="https://t.me/id_anda" class="btn-green-main">KLAIM HADIAH / HUBUNGI OWNER</a>
-        </div>
 
-        <!-- Support Footer - Rata & Sesuai Permintaan -->
-        <div class="footer-support">
-            <div class="support-badge bg-git-tele">
-                <i class="fab fa-github"></i>
-                <i class="fab fa-telegram"></i>
+            <!-- SUPPORT BLOCK (UI/UX TER-BLOCK DENGAN LOGO UNIK) -->
+            <div class="support-block">
+                <!-- GitHub (Lingkaran) -->
+                <a href="https://github.com/Dedealdian" target="_blank" class="logo-btn shape-circle bg-git">
+                    <i class="fab fa-github"></i>
+                </a>
+
+                <!-- Telegram (Lingkaran) -->
+                <a href="https://t.me/chbotid" target="_blank" class="logo-btn shape-circle bg-tele">
+                    <i class="fab fa-telegram"></i>
+                </a>
+
+                <!-- Sambungkata (Diamond/Ketupat) -->
+                <a href="https://t.me/bungkatabot" target="_blank" class="logo-btn shape-diamond bg-sambung">
+                    <span>Sambung kata</span>
+                </a>
+
+                <!-- DrakWebot (Hexagon) -->
+                <a href="https://t.me/drakwebot" target="_blank" class="logo-btn shape-hexagon bg-drak">
+                    Drak Webot
+                </a>
+
+                <!-- OfficialSambungKata (Hexagon Emas) -->
+                <a href="https://t.me/officialsambungkata" target="_blank" class="logo-btn shape-hexagon bg-official">
+                    Official Sambung Kata
+                </a>
+
+                <!-- botindonesia (Lingkaran Merah) -->
+                <a href="https://t.me/botindonesia" target="_blank" class="logo-btn shape-circle bg-botindo">
+                    Bot Indo
+                </a>
+
+                <!-- ChBotID (Oval) -->
+                <a href="https://t.me/chbotid" target="_blank" class="logo-btn shape-oval bg-tele">
+                    ChBotID
+                </a>
+
+                <!-- Syakilla (Oval Pink) -->
+                <a href="https://t.me/osnsxbot" target="_blank" class="logo-btn shape-oval bg-syakilla">
+                    Syakilla
+                </a>
             </div>
-            
-            <a href="https://t.me/bungkatabot" class="support-badge bg-blue-latex">Sambungkata</a>
-            
-            <a href="https://t.me/drakwebot" class="support-badge bg-black-h4">DrakWebot</a>
-            
-            <a href="https://t.me/officialsambungkata" class="support-badge bg-gold-h2">OfficialSambungKata</a>
-            
-            <a href="https://t.me/botindonesia" class="support-badge bg-red-bold">botindonesia</a>
-            
-            <a href="https://t.me/chbotid" class="support-badge bg-standard">ChBotID</a>
-            
-            <a href="https://t.me/osnsxbot" class="support-badge bg-pink-italic">Syakilla</a>
         </div>
     </div>
 
@@ -216,4 +232,4 @@
         }
     </script>
 </body>
-</html>	
+</html>
