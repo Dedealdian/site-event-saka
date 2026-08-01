@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hadiah Spesial Season 7 - Bot Sambung Kata</title>
+    <!-- Font agar tampilan lebih modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Layar awal untuk memicu musik (Aturan Browser) */
+        #overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, #be0000, #ff0000);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        #overlay button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background: white;
+            color: #be0000;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            display: none; /* Muncul setelah tombol diklik */
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header-img {
+            width: 100%;
+            display: block;
+        }
+
+        .content {
+            padding: 20px;
+            white-space: pre-wrap; /* Menjaga format spasi/baris seperti di bot */
+            line-height: 1.6;
+            font-size: 14px;
+            background: #fff;
+            font-family: 'Courier New', Courier, monospace; /* Gaya teks bot */
+        }
+
+        a {
+            color: #0088cc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn-telegram {
+            display: block;
+            width: 80%;
+            margin: 20px auto;
+            padding: 15px;
+            background: #0088cc;
+            color: white !important;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Overlay Pembuka -->
+    <div id="overlay">
+        <h1>MERDEKA! 🇮🇩</h1>
+        <p>Klik tombol di bawah untuk melihat pengumuman</p>
+        <button onclick="mulaiWeb()">LIHAT HADIAH</button>
+    </div>
+
+    <!-- Audio Lagu 17 Agustus 1945 -->
+    <audio id="laguMerdeka" loop>
+        <source src="https://archive.org/download/HariMerdeka/Hari%20Merdeka.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container" id="mainContent">
+        <!-- Foto Utama -->
+        <img src="foto.png" alt="Independence Day" class="header-img">
+
+        <div class="content">
+ 🎉 HADIAH SPESIAL SEASON 7 🎉
+══════════════════════════════════════════
+
+Dalam rangka memperingati Hari Kemerdekaan
+Republik Indonesia yang ke-80, Bot Sambung
+Kata mempersembahkan Season 7 dengan
+hadiah istimewa bagi para pemenang.
+
+──────────────────────────────────────────
+🏆 HADIAH RESMI DARI OWNER
+──────────────────────────────────────────
+
+🥇 Peringkat 1  : Rp30.000
+🥈 Peringkat 2  : Rp20.000
+🥉 Peringkat 3  : Rp10.000
+
+Selamat kepada para pemain yang berhasil
+menempati posisi podium Season 7! 🎊
+
+──────────────────────────────────────────
+💸 KLAIM SALDO HADIAH
+──────────────────────────────────────────
+
+Pemenang yang berhak atas hadiah dapat
+melakukan klaim dengan cara menghubungi
+Owner melalui Telegram:
+
+   👉 <a href="https://t.me/id_anda">SEHAN</a>
+
+⏰ Jam Klaim  : 00.00 WIB atau lebih
+📅 Batas Klaim: 7 hari setelah pengumuman
+📌 Metode     : Transfer / QRIS (menyesuaikan)
+
+Pemenang yang tidak melakukan klaim pada
+batas waktu yang telah ditentukan dianggap
+mengundurkan diri dan hadiah dianggap hangus.
+
+──────────────────────────────────────────
+💝 JADILAH DONATUR! Tambah Hadiah Pemenang!
+──────────────────────────────────────────
+
+Total hadiah yang dibagikan dapat bertambah
+besar apabila semakin banyak donatur yang
+berpartisipasi. Ayo ikut serta dalam
+memberikan apresiasi kepada para pemenang! 💖
+
+✨ Mengapa Menjadi Donatur?
+  • Berkontribusi langsung untuk hadiah pemain
+  • Nama Anda bisa di-umumkan sebagai donatur
+  • Dukungan Anda sangat berarti bagi komunitas
+  • Cara mudah, cepat, dan aman
+
+📩 Cara Menjadi Donatur:
+  1. Hubungi Owner melalui username Telegram
+     👉 <a href="https://t.me/id_anda">SEHAN</a>
+  2. Sampaikan niat dan nominal donasi Anda
+  3. Lakukan pembayaran melalui QRIS
+     yang telah disediakan
+  4. Konfirmasi pembayaran kepada Owner
+  5. Donasi Anda akan langsung ditambahkan
+     ke total hadiah pemenang Season 7! 🎁
+
+💡 Berapa pun nominalnya, setiap donasi
+   akan sangat berarti bagi para pemenang.
+
+──────────────────────────────────────────
+
+Mari ramaikan Season 7 dan raih posisi
+teratas Anda! 🇮🇩
+
+Salam hormat,
+
+<a href="https://t.me/id_anda">Sehan SA-KA</a>
+
+<a href="https://t.me/id_anda" class="btn-telegram">KLAIM HADIAH / DONASI VIA TELEGRAM</a>
+        </div>
+
+        <footer>
+            &copy; 2024 Bot Sambung Kata - Sehan SA-KA
+        </footer>
+    </div>
+
+    <script>
+        function mulaiWeb() {
+            // Memutar audio
+            var audio = document.getElementById("laguMerdeka");
+            audio.play();
+
+            // Menghilangkan overlay dan menampilkan konten
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("mainContent").style.display = "block";
+        }
+    </script>
+</body>
+</html>
