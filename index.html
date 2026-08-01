@@ -3,239 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hadiah Spesial Season 7 - Bot Sambung Kata</title>
-    <!-- Import Font Modern & LaTeX Style -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <title>Event Merdeka - ChBotID</title>
+    <!-- Import Font Modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;600&family=EB+Garamond:wght@600&display=swap" rel="stylesheet">
     <!-- FontAwesome untuk Logo GitHub -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* Desain Background Merah Putih Seimbang */
+        :root {
+            --merah: #be0000;
+            --putih: #ffffff;
+            --kuning: #ffcc00;
+            --hijau: #28a745;
+            --hitam: #1a1a1a;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #be0000 50%, #ffffff 50%);
+            font-family: 'Inter', sans-serif; /* Font bersih dan mudah dibaca */
+            background: linear-gradient(180deg, var(--merah) 0%, var(--merah) 350px, var(--putih) 350px, var(--putih) 100%);
             background-attachment: fixed;
-            font-family: 'EB Garamond', serif; /* Font default miring/italic nanti diatur di konten */
+            color: #333;
             display: flex;
             justify-content: center;
             min-height: 100vh;
         }
 
-        /* Layar Pembuka */
+        /* Tampilan Awal (Intro) */
         #overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: #be0000;
+            background: var(--merah);
             z-index: 9999;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             color: white; text-align: center;
+            padding: 20px;
         }
 
-        #overlay h1 { font-family: 'Poppins', sans-serif; font-size: 3rem; margin: 0; }
+        #overlay h1 { 
+            font-family: 'Poppins', sans-serif; 
+            font-weight: 800; 
+            font-size: 2.5rem; 
+            margin: 0;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        #overlay p {
+            font-size: 1.1rem;
+            margin: 15px 0 30px;
+            max-width: 300px;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
 
         #overlay button {
-            padding: 15px 40px; font-size: 1.2rem; background: white; color: #be0000;
-            border: none; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: 0.3s;
+            padding: 18px 45px; 
+            font-size: 1.1rem; 
+            background: var(--kuning); /* Kuning Mencolok */
+            color: var(--hitam); 
+            border: none; border-radius: 12px; 
+            cursor: pointer; font-weight: 800;
+            text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
+            transition: 0.3s;
         }
+
+        #overlay button:active { transform: scale(0.95); }
 
         /* Container Utama */
         .container {
-            max-width: 600px; width: 95%; background: white;
-            display: none; margin: 20px 0; border-radius: 15px; overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 2px solid #be0000;
+            max-width: 550px; width: 92%; background: var(--putih);
+            display: none; margin: 40px 0; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border: 1px solid rgba(0,0,0,0.05);
+            animation: slideUp 0.6s ease-out;
         }
 
-        .header-img { width: 100%; display: block; border-bottom: 5px solid #be0000; }
-
-        /* Styling Teks Konten */
-        .content {
-            padding: 25px;
-            font-style: italic; /* Seluruh isi font miring sesuai permintaan */
-            line-height: 1.6;
-            color: #333;
-            font-size: 16px;
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Judul (Bold) */
-        .title-bold {
+        .header-img { width: 100%; display: block; }
+
+        /* Styling Konten */
+        .content { padding: 25px; }
+
+        .section-title {
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
-            font-style: normal;
-            color: #be0000;
-            text-align: center;
-            display: block;
-            font-size: 1.2rem;
-            margin-top: 20px;
+            color: var(--merah);
+            font-size: 1.1rem;
+            margin: 25px 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* Gaya LaTeX untuk SEHAN */
-        .latex-font {
+        .text-body {
+            line-height: 1.7;
+            font-size: 15px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* Sistem Tab pada Nomor */
+        .list-item {
+            padding-left: 25px; /* Ruang Tab */
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        /* Gaya Khusus Nama SEHAN (Latex Style) */
+        .latex-style {
             font-family: 'EB Garamond', serif;
-            font-weight: bold;
-            font-style: normal;
-            font-variant: small-caps;
-            letter-spacing: 1px;
-            color: #0044cc;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #0056b3;
+            font-size: 1.1rem;
         }
 
-        /* Tombol Hijau Selaras */
-        .btn-green {
-            display: block; width: 85%; margin: 30px auto; padding: 15px;
-            background: #28a745; color: white !important; text-align: center;
-            border-radius: 50px; font-weight: bold; font-family: 'Poppins', sans-serif;
-            font-style: normal; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        /* Tombol Telegram */
+        .btn-action {
+            display: block; width: 100%; box-sizing: border-box;
+            margin: 30px 0; padding: 16px;
+            background: var(--hijau); color: white !important; text-align: center;
+            border-radius: 12px; font-weight: 700; font-family: 'Poppins', sans-serif;
+            text-decoration: none; font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
         }
 
         /* Footer Support Section */
-        .support-section {
-            background: #f9f9f9;
-            padding: 15px;
-            text-align: center;
-            border-top: 1px solid #ddd;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
+        .footer-support {
+            background: #fcfcfc;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
         }
 
-        .support-item {
-            display: flex;
-            align-items: center;
-            font-size: 12px;
-            color: #555;
-            font-style: normal;
-        }
-
-        .support-item i { font-size: 18px; margin-right: 5px; color: #333; }
-
-        /* Label Logo Buatan (CSS Based) */
-        .logo-badge {
-            font-family: 'EB Garamond', serif;
-            background: #333;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
+        .badge {
+            background: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 6px;
             font-size: 11px;
-            font-weight: bold;
-            margin-left: 5px;
+            color: #666;
+            font-weight: 600;
+            display: flex; align-items: center; gap: 5px;
+            border: 1px solid #e0e0e0;
         }
 
-        .ai-studio { background: #4285f4; }
-        .bot-id { background: #be0000; }
-        .ch-bot { background: #0088cc; }
+        .badge.latex-text {
+            font-family: 'EB Garamond', serif;
+            font-size: 13px;
+            background: #333;
+            color: #fff;
+        }
 
+        .badge-blue { background: #0088cc; color: #fff; border: none; }
+        .badge-dark { background: #1a1a1a; color: #fff; border: none; }
+
+        hr { border: 0; border-top: 1px solid #eee; margin: 20px 0; }
     </style>
 </head>
 <body>
 
-    <!-- Overlay Pembuka -->
+    <!-- Layar Awal -->
     <div id="overlay">
-        <h1>MERDEKA! 🇮🇩</h1>
-        <p>Klik tombol di bawah untuk melihat hadiah</p>
+        <h1>🇮🇩MERDEKA🪖</h1>
+        <p>Buka event untuk mengetahui informasi Seputar ChBotID</p>
         <button onclick="mulaiWeb()">BUKA SEKARANG</button>
     </div>
 
-    <!-- Audio Lagu 17 Agustus 1945 -->
+    <!-- Audio -->
     <audio id="laguMerdeka" loop>
         <source src="https://archive.org/download/HariMerdeka/Hari%20Merdeka.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container" id="mainContent">
-        <!-- Foto Utama -->
-        <img src="foto.png" class="header-img">
+        <!-- Banner -->
+        <img src="foto.png" class="header-img" alt="Header Event">
 
         <div class="content">
-<span class="title-bold">🎉 HADIAH SPESIAL SEASON 7 🎉</span>
-══════════════════════════════════════
+            <div style="text-align:center;">
+                <span style="font-size: 24px;">🎉</span>
+                <h2 style="font-family:'Poppins'; margin: 5px 0; font-weight:800;">HADIAH SPESIAL SEASON 7</h2>
+            </div>
+            
+            <hr>
 
-Dalam rangka memperingati Hari Kemerdekaan
-Republik Indonesia yang ke-80, Bot Sambung
-Kata mempersembahkan Season 7 dengan
-hadiah istimewa bagi para pemenang.
+            <div class="text-body">
+                Dalam rangka memperingati Hari Kemerdekaan Republik Indonesia yang ke-80, Bot Sambung Kata mempersembahkan Season 7 dengan hadiah istimewa bagi para pemenang.
+            </div>
 
-<span class="title-bold">🏆 HADIAH RESMI DARI OWNER</span>
-──────────────────────────────────────
+            <div class="section-title">🏆 HADIAH RESMI DARI OWNER</div>
+            <div class="list-item">1. Peringkat 1 : Rp30.000</div>
+            <div class="list-item">2. Peringkat 2 : Rp20.000</div>
+            <div class="list-item">3. Peringkat 3 : Rp10.000</div>
 
-🥇 Peringkat 1  : Rp30.000
-🥈 Peringkat 2  : Rp20.000
-🥉 Peringkat 3  : Rp10.000
+            <div class="text-body" style="margin-top:15px;">
+                Selamat kepada para pemain yang berhasil menempati posisi podium Season 7! 🎊
+            </div>
 
-Selamat kepada para pemain yang berhasil
-menempati posisi podium Season 7! 🎊
+            <div class="section-title">💸 KLAIM SALDO HADIAH</div>
+            <div class="text-body">
+                Pemenang yang berhak atas hadiah dapat melakukan klaim dengan cara menghubungi Owner melalui Telegram:
+                <br><br>
+                👉 <a href="https://t.me/id_anda" class="latex-style">SEHAN</a>
+            </div>
 
-<span class="title-bold">💸 KLAIM SALDO HADIAH</span>
-──────────────────────────────────────
+            <div class="section-title">💝 JADILAH DONATUR!</div>
+            <div class="text-body">
+                Total hadiah dapat bertambah besar apabila banyak donatur yang berpartisipasi. Cara menjadi donatur:
+            </div>
+            <div class="list-item">1. Hubungi Owner melalui Telegram <span class="latex-style">SEHAN</span></div>
+            <div class="list-item">2. Sampaikan niat dan nominal donasi Anda.</div>
+            <div class="list-item">3. Lakukan pembayaran melalui QRIS yang disediakan.</div>
+            <div class="list-item">4. Konfirmasi pembayaran kepada Owner.</div>
 
-Pemenang yang berhak atas hadiah dapat
-melakukan klaim dengan cara menghubungi
-Owner melalui Telegram:
+            <div class="text-body" style="margin-top:20px; font-weight:600; text-align:center;">
+                Mari ramaikan Season 7 dan raih posisi teratas Anda! 🇮🇩
+            </div>
 
-   👉 <a href="https://t.me/id_anda" class="latex-font">SEHAN</a>
+            <div style="text-align: center; margin-top: 30px;">
+                <p style="margin:0; font-size: 14px;">Salam hormat,</p>
+                <p class="latex-style" style="margin:5px 0 0;">Sehan SA-KA</p>
+            </div>
 
-⏰ Jam Klaim  : 00.00 WIB atau lebih
-📅 Batas Klaim: 7 hari setelah pengumuman
-📌 Metode     : Transfer / QRIS (menyesuaikan)
-
-Pemenang yang tidak melakukan klaim pada
-batas waktu yang telah ditentukan dianggap
-mengundurkan diri dan hadiah dianggap hangus.
-
-<span class="title-bold">💝 JADILAH DONATUR!</span>
-──────────────────────────────────────
-
-Total hadiah yang dibagikan dapat bertambah
-besar apabila semakin banyak donatur yang
-berpartisipasi. Ayo ikut serta dalam
-memberikan apresiasi kepada para pemenang! 💖
-
-📩 Cara Menjadi Donatur:
-  1. Hubungi Owner melalui username Telegram
-     👉 <a href="https://t.me/id_anda" class="latex-font">SEHAN</a>
-  2. Sampaikan niat dan nominal donasi Anda
-  3. Lakukan pembayaran melalui QRIS
-  4. Konfirmasi pembayaran kepada Owner
-
-Mari ramaikan Season 7! 🇮🇩
-
-Salam hormat,
-
-<span class="latex-font">Sehan SA-KA</span>
-
-<a href="https://t.me/id_anda" class="btn-green">HUBUNGI OWNER (TELEGRAM)</a>
+            <a href="https://t.me/id_anda" class="btn-action">HUBUNGI OWNER (TELEGRAM)</a>
         </div>
 
-        <!-- Support Section di paling bawah -->
-        <div class="support-section">
-            <div class="support-item">
-                <i class="fab fa-github"></i> <span>GitHub</span>
-            </div>
-            <div class="support-item">
-                <span class="logo-badge">Sambungkata</span>
-            </div>
-            <div class="support-item">
-                <i class="fas fa-microchip"></i> <span class="logo-badge ai-studio">AI Studio</span>
-            </div>
-            <div class="support-item">
-                <span class="logo-badge">officialsambungkata</span>
-            </div>
-            <div class="support-item">
-                <span class="logo-badge bot-id">botindonesia</span>
-            </div>
-            <div class="support-item">
-                <span class="logo-badge ch-bot">ChBotId</span>
-            </div>
+        <!-- Footer Support -->
+        <div class="footer-support">
+            <div class="badge"><i class="fab fa-github"></i> GitHub</div>
+            <div class="badge latex-text">Sambungkata</div>
+            <div class="badge badge-dark">Drakwebot</div>
+            <div class="badge">officialsambungkata</div>
+            <div class="badge">botindonesia</div>
+            <div class="badge badge-blue">ChBotId</div>
         </div>
     </div>
 
     <script>
         function mulaiWeb() {
             var audio = document.getElementById("laguMerdeka");
-            audio.play();
+            audio.play().catch(function(e) { console.log("Audio play blocked") });
+            
             document.getElementById("overlay").style.display = "none";
             document.getElementById("mainContent").style.display = "block";
+            window.scrollTo(0,0);
         }
     </script>
 </body>
