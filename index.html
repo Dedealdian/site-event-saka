@@ -4,96 +4,129 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hadiah Spesial Season 7 - Bot Sambung Kata</title>
-    <!-- Font agar tampilan lebih modern -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Import Font Modern & LaTeX Style -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <!-- FontAwesome untuk Logo GitHub -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
+        /* Desain Background Merah Putih Seimbang */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            background: linear-gradient(to bottom, #be0000 50%, #ffffff 50%);
+            background-attachment: fixed;
+            font-family: 'EB Garamond', serif; /* Font default miring/italic nanti diatur di konten */
             display: flex;
             justify-content: center;
-            align-items: flex-start;
             min-height: 100vh;
         }
 
-        /* Layar awal untuk memicu musik (Aturan Browser) */
+        /* Layar Pembuka */
         #overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(45deg, #be0000, #ff0000);
+            background: #be0000;
             z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            color: white; text-align: center;
         }
+
+        #overlay h1 { font-family: 'Poppins', sans-serif; font-size: 3rem; margin: 0; }
 
         #overlay button {
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            background: white;
-            color: #be0000;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            padding: 15px 40px; font-size: 1.2rem; background: white; color: #be0000;
+            border: none; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: 0.3s;
         }
 
+        /* Container Utama */
         .container {
-            max-width: 600px;
-            width: 100%;
-            background: white;
-            display: none; /* Muncul setelah tombol diklik */
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            max-width: 600px; width: 95%; background: white;
+            display: none; margin: 20px 0; border-radius: 15px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 2px solid #be0000;
         }
 
-        .header-img {
-            width: 100%;
-            display: block;
-        }
+        .header-img { width: 100%; display: block; border-bottom: 5px solid #be0000; }
 
+        /* Styling Teks Konten */
         .content {
-            padding: 20px;
-            white-space: pre-wrap; /* Menjaga format spasi/baris seperti di bot */
+            padding: 25px;
+            font-style: italic; /* Seluruh isi font miring sesuai permintaan */
             line-height: 1.6;
-            font-size: 14px;
-            background: #fff;
-            font-family: 'Courier New', Courier, monospace; /* Gaya teks bot */
+            color: #333;
+            font-size: 16px;
         }
 
-        a {
-            color: #0088cc;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .btn-telegram {
-            display: block;
-            width: 80%;
-            margin: 20px auto;
-            padding: 15px;
-            background: #0088cc;
-            color: white !important;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: bold;
+        /* Judul (Bold) */
+        .title-bold {
             font-family: 'Poppins', sans-serif;
-            text-decoration: none;
+            font-weight: 700;
+            font-style: normal;
+            color: #be0000;
+            text-align: center;
+            display: block;
+            font-size: 1.2rem;
+            margin-top: 20px;
         }
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 12px;
-            color: #888;
+        /* Gaya LaTeX untuk SEHAN */
+        .latex-font {
+            font-family: 'EB Garamond', serif;
+            font-weight: bold;
+            font-style: normal;
+            font-variant: small-caps;
+            letter-spacing: 1px;
+            color: #0044cc;
         }
+
+        /* Tombol Hijau Selaras */
+        .btn-green {
+            display: block; width: 85%; margin: 30px auto; padding: 15px;
+            background: #28a745; color: white !important; text-align: center;
+            border-radius: 50px; font-weight: bold; font-family: 'Poppins', sans-serif;
+            font-style: normal; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Footer Support Section */
+        .support-section {
+            background: #f9f9f9;
+            padding: 15px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .support-item {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #555;
+            font-style: normal;
+        }
+
+        .support-item i { font-size: 18px; margin-right: 5px; color: #333; }
+
+        /* Label Logo Buatan (CSS Based) */
+        .logo-badge {
+            font-family: 'EB Garamond', serif;
+            background: #333;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .ai-studio { background: #4285f4; }
+        .bot-id { background: #be0000; }
+        .ch-bot { background: #0088cc; }
+
     </style>
 </head>
 <body>
@@ -101,8 +134,8 @@
     <!-- Overlay Pembuka -->
     <div id="overlay">
         <h1>MERDEKA! 🇮🇩</h1>
-        <p>Klik tombol di bawah untuk melihat pengumuman</p>
-        <button onclick="mulaiWeb()">LIHAT HADIAH</button>
+        <p>Klik tombol di bawah untuk melihat hadiah</p>
+        <button onclick="mulaiWeb()">BUKA SEKARANG</button>
     </div>
 
     <!-- Audio Lagu 17 Agustus 1945 -->
@@ -112,20 +145,19 @@
 
     <div class="container" id="mainContent">
         <!-- Foto Utama -->
-        <img src="foto.png" alt="Independence Day" class="header-img">
+        <img src="foto.png" class="header-img">
 
         <div class="content">
- 🎉 HADIAH SPESIAL SEASON 7 🎉
-══════════════════════════════════════════
+<span class="title-bold">🎉 HADIAH SPESIAL SEASON 7 🎉</span>
+══════════════════════════════════════
 
 Dalam rangka memperingati Hari Kemerdekaan
 Republik Indonesia yang ke-80, Bot Sambung
 Kata mempersembahkan Season 7 dengan
 hadiah istimewa bagi para pemenang.
 
-──────────────────────────────────────────
-🏆 HADIAH RESMI DARI OWNER
-──────────────────────────────────────────
+<span class="title-bold">🏆 HADIAH RESMI DARI OWNER</span>
+──────────────────────────────────────
 
 🥇 Peringkat 1  : Rp30.000
 🥈 Peringkat 2  : Rp20.000
@@ -134,15 +166,14 @@ hadiah istimewa bagi para pemenang.
 Selamat kepada para pemain yang berhasil
 menempati posisi podium Season 7! 🎊
 
-──────────────────────────────────────────
-💸 KLAIM SALDO HADIAH
-──────────────────────────────────────────
+<span class="title-bold">💸 KLAIM SALDO HADIAH</span>
+──────────────────────────────────────
 
 Pemenang yang berhak atas hadiah dapat
 melakukan klaim dengan cara menghubungi
 Owner melalui Telegram:
 
-   👉 <a href="https://t.me/id_anda">SEHAN</a>
+   👉 <a href="https://t.me/id_anda" class="latex-font">SEHAN</a>
 
 ⏰ Jam Klaim  : 00.00 WIB atau lebih
 📅 Batas Klaim: 7 hari setelah pengumuman
@@ -152,58 +183,57 @@ Pemenang yang tidak melakukan klaim pada
 batas waktu yang telah ditentukan dianggap
 mengundurkan diri dan hadiah dianggap hangus.
 
-──────────────────────────────────────────
-💝 JADILAH DONATUR! Tambah Hadiah Pemenang!
-──────────────────────────────────────────
+<span class="title-bold">💝 JADILAH DONATUR!</span>
+──────────────────────────────────────
 
 Total hadiah yang dibagikan dapat bertambah
 besar apabila semakin banyak donatur yang
 berpartisipasi. Ayo ikut serta dalam
 memberikan apresiasi kepada para pemenang! 💖
 
-✨ Mengapa Menjadi Donatur?
-  • Berkontribusi langsung untuk hadiah pemain
-  • Nama Anda bisa di-umumkan sebagai donatur
-  • Dukungan Anda sangat berarti bagi komunitas
-  • Cara mudah, cepat, dan aman
-
 📩 Cara Menjadi Donatur:
   1. Hubungi Owner melalui username Telegram
-     👉 <a href="https://t.me/id_anda">SEHAN</a>
+     👉 <a href="https://t.me/id_anda" class="latex-font">SEHAN</a>
   2. Sampaikan niat dan nominal donasi Anda
   3. Lakukan pembayaran melalui QRIS
-     yang telah disediakan
   4. Konfirmasi pembayaran kepada Owner
-  5. Donasi Anda akan langsung ditambahkan
-     ke total hadiah pemenang Season 7! 🎁
 
-💡 Berapa pun nominalnya, setiap donasi
-   akan sangat berarti bagi para pemenang.
-
-──────────────────────────────────────────
-
-Mari ramaikan Season 7 dan raih posisi
-teratas Anda! 🇮🇩
+Mari ramaikan Season 7! 🇮🇩
 
 Salam hormat,
 
-<a href="https://t.me/id_anda">Sehan SA-KA</a>
+<span class="latex-font">Sehan SA-KA</span>
 
-<a href="https://t.me/id_anda" class="btn-telegram">KLAIM HADIAH / DONASI VIA TELEGRAM</a>
+<a href="https://t.me/id_anda" class="btn-green">HUBUNGI OWNER (TELEGRAM)</a>
         </div>
 
-        <footer>
-            &copy; 2024 Bot Sambung Kata - Sehan SA-KA
-        </footer>
+        <!-- Support Section di paling bawah -->
+        <div class="support-section">
+            <div class="support-item">
+                <i class="fab fa-github"></i> <span>GitHub</span>
+            </div>
+            <div class="support-item">
+                <span class="logo-badge">Sambungkata</span>
+            </div>
+            <div class="support-item">
+                <i class="fas fa-microchip"></i> <span class="logo-badge ai-studio">AI Studio</span>
+            </div>
+            <div class="support-item">
+                <span class="logo-badge">officialsambungkata</span>
+            </div>
+            <div class="support-item">
+                <span class="logo-badge bot-id">botindonesia</span>
+            </div>
+            <div class="support-item">
+                <span class="logo-badge ch-bot">ChBotId</span>
+            </div>
+        </div>
     </div>
 
     <script>
         function mulaiWeb() {
-            // Memutar audio
             var audio = document.getElementById("laguMerdeka");
             audio.play();
-
-            // Menghilangkan overlay dan menampilkan konten
             document.getElementById("overlay").style.display = "none";
             document.getElementById("mainContent").style.display = "block";
         }
