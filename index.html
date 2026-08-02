@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Merdeka Season 7 - ChBotID</title>
+    <title>Event Sambung Kata - ChBotID</title>
     
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
@@ -18,13 +19,13 @@
             --text-main: #2b2d42;
             --text-muted: #8d99ae;
             --success: #2b9348;
+            --fire-orange: #ff4d00;
         }
 
         * { box-sizing: border-box; }
 
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             color: var(--text-main);
@@ -32,7 +33,6 @@
             min-height: 100vh;
         }
 
-        /* Animated Background Decor */
         body::before {
             content: "";
             position: fixed;
@@ -41,11 +41,11 @@
             z-index: 1000;
         }
 
-        /* Intro Overlay */
+        /* Intro Overlay Updated */
         #overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, var(--primary-red), var(--dark-red));
+            background: radial-gradient(circle at center, #1a1a1a, #000000);
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -57,20 +57,52 @@
 
         #overlay.hide { transform: translateY(-100%); }
 
-        .overlay-content { text-align: center; padding: 20px; animation: fadeIn 1s ease; }
-        .overlay-content h1 { 
-            font-size: 3rem; 
-            font-weight: 800; 
-            margin-bottom: 10px; 
-            letter-spacing: -1px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        .overlay-content { 
+            text-align: center; 
+            padding: 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 20px;
         }
-        
-        .start-btn {
-            padding: 18px 40px;
-            font-size: 1rem;
+
+        /* Fire Text Animation */
+        .fire-title {
+            font-size: 2.8rem;
             font-weight: 800;
-            background: var(--gold);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-shadow: 0 0 20px var(--fire-orange);
+            animation: flicker 1.5s infinite alternate;
+        }
+
+        .fire-emoji { font-size: 2.5rem; }
+
+        .intro-logo-img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.2));
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1); text-shadow: 0 0 10px var(--fire-orange); }
+            100% { transform: scale(1.02); text-shadow: 0 0 30px var(--fire-orange), 0 0 40px var(--primary-red); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .start-btn {
+            padding: 18px 50px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--gold), #ff8c00);
             color: #000;
             border: none;
             border-radius: 50px;
@@ -79,7 +111,7 @@
             box-shadow: 0 10px 25px rgba(255, 183, 3, 0.4);
             text-transform: uppercase;
         }
-        .start-btn:hover { transform: scale(1.05); background: white; }
+        .start-btn:hover { transform: scale(1.1); background: white; }
 
         /* Container Main */
         .main-wrapper {
@@ -107,7 +139,6 @@
 
         .content-padding { padding: 40px 30px; }
 
-        /* Typography */
         .title-section {
             text-align: center;
             font-weight: 800;
@@ -130,7 +161,6 @@
             margin-bottom: 30px;
         }
 
-        /* Prize Table Modern */
         .prize-container {
             background: #fff;
             border-radius: 20px;
@@ -149,14 +179,12 @@
         .rank { font-weight: 800; display: flex; align-items: center; gap: 10px; }
         .amount { color: var(--success); font-weight: 800; }
 
-        /* Info Highlight */
         .info-box {
-            background: #fff9e6;
-            border-left: 5px solid var(--gold);
+            background: #fdf2f2;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 15px;
             margin: 25px 0;
-            font-size: 0.95rem;
+            text-align: center;
         }
 
         .claim-title {
@@ -169,11 +197,6 @@
             gap: 10px;
         }
 
-        /* List Styling */
-        ul, ol { padding-left: 20px; color: #444; }
-        li { margin-bottom: 12px; font-size: 0.95rem; line-height: 1.5; }
-
-        /* Buttons */
         .cta-button {
             display: flex;
             align-items: center;
@@ -189,9 +212,8 @@
             transition: 0.3s;
             box-shadow: 0 10px 20px rgba(43, 147, 72, 0.2);
         }
-        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(43, 147, 72, 0.3); }
 
-        /* SUPPORT SECTION (NEW) */
+        /* SUPPORT SECTION */
         .support-section {
             margin-top: 50px;
             padding: 20px 0;
@@ -222,38 +244,20 @@
             opacity: 1;
             transform: scale(1.1);
         }
-        .logo-item img, .logo-item i {
-            height: 35px;
-            width: auto;
-            display: block;
-        }
+        .logo-item img { height: 35px; width: auto; display: block; }
         .github-icon { font-size: 35px; color: #333; }
 
-        /* Footer Signature */
-        .signature {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-        }
-        .owner-name {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            color: var(--primary-red);
-            font-size: 1.3rem;
-            margin: 5px 0;
-        }
+        .signature { text-align: center; margin-top: 40px; }
+        .owner-name { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--primary-red); font-size: 1.3rem; }
 
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { 
             from { opacity: 0; transform: translateY(30px); } 
             to { opacity: 1; transform: translateY(0); } 
         }
 
         @media (max-width: 480px) {
-            .overlay-content h1 { font-size: 2.2rem; }
-            .content-padding { padding: 30px 20px; }
-            .logo-grid { gap: 15px; }
+            .fire-title { font-size: 1.8rem; }
+            .intro-logo-img { width: 120px; height: 120px; }
         }
     </style>
 </head>
@@ -262,9 +266,18 @@
     <!-- Intro Overlay -->
     <div id="overlay">
         <div class="overlay-content">
-            <h1>🇮🇩 MERDEKA 🪖</h1>
-            <p style="margin-bottom: 30px; font-weight: 400; opacity: 0.9;">Season 7 Kemerdekaan - Seputar ChBotID</p>
-            <button class="start-btn" onclick="mulaiWeb()">Buka Sekarang <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
+            <h1 class="fire-title">
+                <span class="fire-emoji">🔥</span>
+                Event Sambung Kata
+                <span class="fire-emoji">🔥</span>
+            </h1>
+            
+            <!-- Logo PNG di bawah Teks -->
+            <img src="logo.png" alt="ChBotID Logo" class="intro-logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/8644/8644342.png'">
+
+            <button class="start-btn" onclick="mulaiWeb()">
+                Buka Sekarang <i class="fas fa-fire-alt" style="margin-left: 8px;"></i>
+            </button>
         </div>
     </div>
 
@@ -276,7 +289,6 @@
     <!-- Main Content Area -->
     <div class="main-wrapper" id="mainContent">
         <div class="card">
-            <!-- Ganti foto.png sesuai file Anda -->
             <img src="foto.png" alt="Header Merdeka" class="header-banner">
 
             <div class="content-padding">
@@ -295,21 +307,12 @@
                 <!-- PRIZE SECTION -->
                 <p style="font-weight: 800; margin-bottom: 15px;"><i class="fas fa-award"></i> HADIAH RESMI OWNER</p>
                 <div class="prize-container">
-                    <div class="prize-row">
-                        <span class="rank">🥇 Peringkat 1</span>
-                        <span class="amount">Rp30.000</span>
-                    </div>
-                    <div class="prize-row">
-                        <span class="rank">🥈 Peringkat 2</span>
-                        <span class="amount">Rp20.000</span>
-                    </div>
-                    <div class="prize-row">
-                        <span class="rank">🥉 Peringkat 3</span>
-                        <span class="amount">Rp10.000</span>
-                    </div>
+                    <div class="prize-row"><span class="rank">🥇 Peringkat 1</span><span class="amount">Rp30.000</span></div>
+                    <div class="prize-row"><span class="rank">🥈 Peringkat 2</span><span class="amount">Rp20.000</span></div>
+                    <div class="prize-row"><span class="rank">🥉 Peringkat 3</span><span class="amount">Rp10.000</span></div>
                 </div>
 
-                <div class="info-box" style="text-align: center; border: none; background: #fdf2f2;">
+                <div class="info-box">
                     <p style="margin:0; font-weight: bold; font-style: italic; color: var(--dark-red);">
                         Selamat kepada para pemain yang berhasil menempati posisi podium Season 7! 🎊
                     </p>
@@ -318,13 +321,9 @@
                 <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
 
                 <!-- KLAIM SECTION -->
-                <div class="claim-title">
-                    <i class="fas fa-wallet"></i> KLAIM SALDO HADIAH
-                </div>
-                
+                <div class="claim-title"><i class="fas fa-wallet"></i> KLAIM SALDO HADIAH</div>
                 <p style="font-size: 0.95rem; line-height: 1.6;">
-                    Pemenang yang berhak atas hadiah dapat melakukan klaim dengan cara menghubungi Owner melalui Telegram:
-                    <br><br>
+                    Pemenang yang berhak atas hadiah dapat menghubungi Owner melalui Telegram:<br><br>
                     <a href="https://t.me/id_anda" style="color: var(--primary-red); font-weight: 800; text-decoration: none;">
                         <i class="fab fa-telegram"></i> @SEHAN (HUBUNGI SEKARANG)
                     </a>
@@ -337,40 +336,25 @@
                     <div class="prize-row"><span>📌 Metode</span><b style="color: var(--success);">Transfer (Tanpa Potongan)</b></div>
                 </div>
 
-                <p style="font-size: 0.85rem; color: #777; font-style: italic;">
-                    *Pemenang yang tidak melakukan klaim pada batas waktu yang telah ditentukan dianggap mengundurkan diri dan hadiah hangus.
-                </p>
-
                 <!-- DONATUR SECTION -->
                 <div style="margin-top: 40px; background: linear-gradient(to right, #fff5f7, #ffffff); padding: 25px; border-radius: 20px; border: 1px solid #ffe3e8;">
-                    <p style="font-weight: 800; color: #ff4d6d; font-size: 1.1rem; margin-top: 0;">
-                        <i class="fas fa-heart"></i> JADILAH DONATUR!
-                    </p>
-                    <p style="font-size: 0.9rem; color: #555;">
-                        Total hadiah dapat bertambah besar apabila semakin banyak donatur yang berpartisipasi. 
-                        Ayo ikut serta memberikan apresiasi kepada para pemenang!
-                    </p>
-                    
+                    <p style="font-weight: 800; color: #ff4d6d; font-size: 1.1rem; margin-top: 0;"><i class="fas fa-heart"></i> JADILAH DONATUR!</p>
+                    <p style="font-size: 0.9rem; color: #555;">Total hadiah dapat bertambah besar apabila semakin banyak donatur yang berpartisipasi.</p>
                     <p style="font-weight: 800; font-size: 0.9rem; margin-top: 20px;">✨ Mengapa Menjadi Donatur?</p>
-                    <ul style="font-size: 0.85rem;">
+                    <ul style="font-size: 0.85rem; padding-left: 20px;">
                         <li>Berkontribusi langsung untuk hadiah pemain</li>
                         <li>Nama Anda diumumkan secara resmi</li>
                         <li>Mendukung keberlangsungan komunitas</li>
-                        <li>Proses mudah, cepat, dan aman</li>
                     </ul>
-
                     <p style="font-weight: 800; font-size: 0.9rem; margin-top: 20px;">📩 Cara Menjadi Donatur:</p>
-                    <ol style="font-size: 0.85rem;">
+                    <ol style="font-size: 0.85rem; padding-left: 20px;">
                         <li>Hubungi Owner via Telegram <a href="https://t.me/id_anda">@SEHAN</a></li>
                         <li>Sampaikan nominal donasi Anda</li>
                         <li>Lakukan pembayaran melalui QRIS resmi</li>
-                        <li>Donasi Anda langsung ditambahkan ke total hadiah! 🎁</li>
                     </ol>
                 </div>
 
-                <p style="text-align: center; font-weight: 800; margin: 40px 0 20px;">
-                    Mari ramaikan Season 7 dan raih posisi teratas Anda! 🇮🇩
-                </p>
+                <p style="text-align: center; font-weight: 800; margin: 40px 0 20px;">Mari ramaikan Season 7! 🇮🇩</p>
 
                 <div class="signature">
                     <p style="margin:0; font-size: 0.9rem; color: #999;">Salam hormat,</p>
@@ -385,36 +369,14 @@
                 <div class="support-section">
                     <p class="support-title">Official Support & Partners</p>
                     <div class="logo-grid">
-                        <!-- Github (Tanpa Link) -->
-                        <div class="logo-item">
-                            <i class="fab fa-github github-icon"></i>
-                        </div>
-                        
-                        <!-- Logo 0 (Link Sambung Kata) -->
-                        <a href="https://t.me/bungkatabot?startgroup=start" class="logo-item" target="_blank">
-                            <img src="logo.png" alt="Logo Support 1" onerror="this.style.display='none';">
-                            <i class="fas fa-robot" id="fallback-1" style="display:none; font-size: 30px; color: var(--primary-red);"></i>
-                        </a>
-
-                        <!-- Logo 1 (Link OSNSX) -->
-                        <a href="https://t.me/osnsxbot" class="logo-item" target="_blank">
-                            <img src="logo1.png" alt="Logo Support 2" onerror="this.style.display='none';">
-                            <i class="fas fa-shield-halved" id="fallback-2" style="display:none; font-size: 30px; color: #0088cc;"></i>
-                        </a>
-
-                        <!-- Logo 2 (Link Drakwe) -->
-                        <a href="https://t.me/drakwebot" class="logo-item" target="_blank">
-                            <img src="logo2.png" alt="Logo Support 3" onerror="this.style.display='none';">
-                            <i class="fas fa-code" id="fallback-3" style="display:none; font-size: 30px; color: #333;"></i>
-                        </a>
+                        <div class="logo-item"><i class="fab fa-github github-icon"></i></div>
+                        <a href="https://t.me/bungkatabot?startgroup=start" class="logo-item" target="_blank"><img src="logo.png" alt="Logo 0"></a>
+                        <a href="https://t.me/osnsxbot" class="logo-item" target="_blank"><img src="logo1.png" alt="Logo 1"></a>
+                        <a href="https://t.me/drakwebot" class="logo-item" target="_blank"><img src="logo2.png" alt="Logo 2"></a>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <p style="text-align: center; font-size: 0.75rem; color: #aaa; margin: 30px 0;">
-            &copy; 2026 ChBotID Community. Merdeka ke-80 RI.
-        </p>
     </div>
 
     <script>
@@ -423,28 +385,14 @@
             const overlay = document.getElementById("overlay");
             const main = document.getElementById("mainContent");
 
-            // Play Audio
-            audio.play().catch(e => console.log("User interaction required for audio"));
+            audio.play().catch(e => console.log("User interaction required"));
 
-            // Animation Transition
             overlay.classList.add('hide');
-            
             setTimeout(() => {
                 overlay.style.display = "none";
                 main.style.display = "block";
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }, 800);
-        }
-
-        // Script tambahan untuk menangani jika gambar logo belum diupload (sebagai fallback)
-        window.onload = function() {
-            const imgs = document.querySelectorAll('.logo-item img');
-            imgs.forEach((img, index) => {
-                img.onerror = function() {
-                    this.style.display = 'none';
-                    document.getElementById('fallback-' + (index + 1)).style.display = 'block';
-                };
-            });
         }
     </script>
 </body>
