@@ -3,206 +3,448 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Merdeka - ChBotID</title>
-    <!-- Import Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&family=Inter:wght@400;600&family=EB+Garamond:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <title>Event Merdeka Season 7 - ChBotID</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --merah: #be0000;
-            --putih: #ffffff;
-            --kuning: #ffcc00;
-            --hijau: #28a745;
-            --emas: #d4af37;
-            --biru-tele: #0088cc;
+            --primary-red: #d90429;
+            --dark-red: #8d0801;
+            --gold: #ffb703;
+            --glass-white: rgba(255, 255, 255, 0.95);
+            --text-main: #2b2d42;
+            --text-muted: #8d99ae;
+            --success: #2b9348;
         }
 
+        * { box-sizing: border-box; }
+
         body {
-            margin: 0; padding: 0;
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(180deg, var(--merah) 50%, var(--putih) 50%);
-            background-attachment: fixed;
-            display: flex; justify-content: center; min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Animated Background Decor */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 8px;
+            background: linear-gradient(90deg, var(--primary-red), white, var(--primary-red));
+            z-index: 1000;
         }
 
         /* Intro Overlay */
         #overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--merah); z-index: 9999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            color: white; text-align: center; padding: 20px;
-        }
-        #overlay h1 { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 2.2rem; margin: 0; }
-        #overlay p { font-size: 1.1rem; margin: 15px 0 30px; max-width: 320px; line-height: 1.4; font-weight: 500; }
-        #overlay button {
-            padding: 18px 45px; font-size: 1.1rem; background: var(--kuning);
-            color: #000; border: none; border-radius: 12px; cursor: pointer; font-weight: 800;
-            text-transform: uppercase; box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, var(--primary-red), var(--dark-red));
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            transition: transform 0.8s cubic-bezier(0.87, 0, 0.13, 1);
         }
 
-        /* Container Utama */
-        .container {
-            max-width: 600px; width: 95%; background: var(--putih);
-            display: none; margin: 40px 0; border-radius: 20px; overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-        }
-        .header-img { width: 100%; display: block; border-bottom: 5px solid var(--merah); }
-        .content { padding: 30px; color: #333; line-height: 1.6; }
+        #overlay.hide { transform: translateY(-100%); }
 
-        /* Custom Text Styles */
-        .title-gold { color: var(--emas); font-weight: 800; font-size: 1.5rem; text-align: center; display: block; }
-        .intro-italic { font-style: italic; margin: 25px 0; font-size: 15px; }
-        .congrats-bold-italic { font-weight: bold; font-style: italic; display: block; margin: 20px 0; }
-        .claim-green { color: var(--hijau); font-weight: 800; font-size: 1.3rem; margin: 20px 0 10px; }
-        .text-bold { font-weight: bold; }
+        .overlay-content { text-align: center; padding: 20px; animation: fadeIn 1s ease; }
+        .overlay-content h1 { 
+            font-size: 3rem; 
+            font-weight: 800; 
+            margin-bottom: 10px; 
+            letter-spacing: -1px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
         
-        /* Tabel Peringkat & Data */
-        .info-table {
-            width: 100%; border-collapse: collapse; margin: 15px 0;
-            background: #fafafa; border: 1px solid #eee; border-radius: 10px; overflow: hidden;
+        .start-btn {
+            padding: 18px 40px;
+            font-size: 1rem;
+            font-weight: 800;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(255, 183, 3, 0.4);
+            text-transform: uppercase;
         }
-        .info-table td { padding: 14px 18px; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
-        .info-table td:first-child { font-weight: bold; width: 45%; background: #f4f4f4; }
+        .start-btn:hover { transform: scale(1.05); background: white; }
 
-        /* LaTeX Style Signature & Links */
-        .latex-style { font-family: 'EB Garamond', serif; font-weight: 700; color: var(--biru-tele); text-decoration: underline; font-size: 1.1rem; }
-
-        .btn-green-main {
-            display: block; width: 100%; padding: 18px; background: var(--hijau);
-            color: white !important; text-align: center; border-radius: 12px;
-            font-weight: 700; text-decoration: none; margin-top: 30px; font-family: 'Poppins', sans-serif;
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        /* Container Main */
+        .main-wrapper {
+            max-width: 650px;
+            margin: 40px auto;
+            padding: 0 15px;
+            display: none;
+            animation: slideUp 0.6s ease;
         }
 
-        .separator { text-align: center; color: #ddd; margin: 20px 0; letter-spacing: 2px; }
-        ul { padding-left: 20px; margin: 10px 0; font-size: 14px; }
-        li { margin-bottom: 8px; }
+        .card {
+            background: var(--glass-white);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.8);
+        }
 
+        .header-banner {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 4px solid var(--primary-red);
+        }
+
+        .content-padding { padding: 40px 30px; }
+
+        /* Typography */
+        .title-section {
+            text-align: center;
+            font-weight: 800;
+            color: var(--primary-red);
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .intro-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #555;
+            text-align: center;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+
+        /* Prize Table Modern */
+        .prize-container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 10px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .prize-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .prize-row:last-child { border: none; }
+        .rank { font-weight: 800; display: flex; align-items: center; gap: 10px; }
+        .amount { color: var(--success); font-weight: 800; }
+
+        /* Info Highlight */
+        .info-box {
+            background: #fff9e6;
+            border-left: 5px solid var(--gold);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            font-size: 0.95rem;
+        }
+
+        .claim-title {
+            color: var(--success);
+            font-weight: 800;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* List Styling */
+        ul, ol { padding-left: 20px; color: #444; }
+        li { margin-bottom: 12px; font-size: 0.95rem; line-height: 1.5; }
+
+        /* Buttons */
+        .cta-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--success);
+            color: white !important;
+            text-decoration: none;
+            padding: 20px;
+            border-radius: 15px;
+            font-weight: 800;
+            margin-top: 30px;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(43, 147, 72, 0.2);
+        }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(43, 147, 72, 0.3); }
+
+        /* SUPPORT SECTION (NEW) */
+        .support-section {
+            margin-top: 50px;
+            padding: 20px 0;
+            border-top: 2px dashed #ddd;
+        }
+        .support-title {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+        .logo-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        .logo-item {
+            transition: all 0.3s ease;
+            filter: grayscale(100%);
+            opacity: 0.7;
+        }
+        .logo-item:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        .logo-item img, .logo-item i {
+            height: 35px;
+            width: auto;
+            display: block;
+        }
+        .github-icon { font-size: 35px; color: #333; }
+
+        /* Footer Signature */
+        .signature {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+        }
+        .owner-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--primary-red);
+            font-size: 1.3rem;
+            margin: 5px 0;
+        }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        @media (max-width: 480px) {
+            .overlay-content h1 { font-size: 2.2rem; }
+            .content-padding { padding: 30px 20px; }
+            .logo-grid { gap: 15px; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Intro -->
+    <!-- Intro Overlay -->
     <div id="overlay">
-        <h1>🇮🇩MERDEKA🪖</h1>
-        <p>Buka event untuk mengetahui informasi Seputar ChBotID</p>
-        <button onclick="mulaiWeb()">BUKA SEKARANG</button>
+        <div class="overlay-content">
+            <h1>🇮🇩 MERDEKA 🪖</h1>
+            <p style="margin-bottom: 30px; font-weight: 400; opacity: 0.9;">Season 7 Kemerdekaan - Seputar ChBotID</p>
+            <button class="start-btn" onclick="mulaiWeb()">Buka Sekarang <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
+        </div>
     </div>
 
-    <!-- Audio -->
+    <!-- Audio Element -->
     <audio id="laguMerdeka" loop>
         <source src="https://archive.org/download/HariMerdeka/Hari%20Merdeka.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="container" id="mainContent">
-        <img src="foto.png" class="header-img">
+    <!-- Main Content Area -->
+    <div class="main-wrapper" id="mainContent">
+        <div class="card">
+            <!-- Ganti foto.png sesuai file Anda -->
+            <img src="foto.png" alt="Header Merdeka" class="header-banner">
 
-        <div class="content">
-            <!-- HEADER -->
-            <span class="title-gold">🎉 HADIAH SPESIAL SEASON 7 🎉</span>
-            <div class="separator">══════════════════════════════════════════</div>
+            <div class="content-padding">
+                <!-- HEADER CONTENT -->
+                <div class="title-section">
+                    <i class="fas fa-trophy" style="color: var(--gold);"></i>
+                    <span>HADIAH SPESIAL SEASON 7</span>
+                    <i class="fas fa-trophy" style="color: var(--gold);"></i>
+                </div>
 
-            <p class="intro-italic">
-                Dalam rangka memperingati Hari Kemerdekaan<br>
-                Republik Indonesia yang ke-80, Bot Sambung<br>
-                Kata mempersembahkan Season 7 dengan<br>
-                hadiah istimewa bagi para pemenang.
-            </p>
+                <div class="intro-text">
+                    "Dalam rangka memperingati Hari Kemerdekaan Republik Indonesia yang ke-80, 
+                    Bot Sambung Kata mempersembahkan Season 7 dengan hadiah istimewa bagi para pemenang."
+                </div>
 
-            <p class="text-bold">🏆 HADIAH RESMI DARI OWNER</p>
-            <table class="info-table">
-                <tr><td>🥇 Peringkat 1</td><td>Rp30.000</td></tr>
-                <tr><td>🥈 Peringkat 2</td><td>Rp20.000</td></tr>
-                <tr><td>🥉 Peringkat 3</td><td>Rp10.000</td></tr>
-            </table>
+                <!-- PRIZE SECTION -->
+                <p style="font-weight: 800; margin-bottom: 15px;"><i class="fas fa-award"></i> HADIAH RESMI OWNER</p>
+                <div class="prize-container">
+                    <div class="prize-row">
+                        <span class="rank">🥇 Peringkat 1</span>
+                        <span class="amount">Rp30.000</span>
+                    </div>
+                    <div class="prize-row">
+                        <span class="rank">🥈 Peringkat 2</span>
+                        <span class="amount">Rp20.000</span>
+                    </div>
+                    <div class="prize-row">
+                        <span class="rank">🥉 Peringkat 3</span>
+                        <span class="amount">Rp10.000</span>
+                    </div>
+                </div>
 
-            <span class="congrats-bold-italic">
-                Selamat kepada para pemain yang berhasil<br>
-                menempati posisi podium Season 7! 🎊
-            </span>
+                <div class="info-box" style="text-align: center; border: none; background: #fdf2f2;">
+                    <p style="margin:0; font-weight: bold; font-style: italic; color: var(--dark-red);">
+                        Selamat kepada para pemain yang berhasil menempati posisi podium Season 7! 🎊
+                    </p>
+                </div>
 
-            <div class="separator">──────────────────────────────────────────</div>
-            
-            <!-- KLAIM SECTION -->
-            <p class="claim-green">💸 KLAIM SALDO HADIAH</p>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
 
-            <p class="text-bold">
-                Pemenang yang berhak atas hadiah dapat<br>
-                melakukan klaim dengan cara menghubungi<br>
-                Owner melalui Telegram:<br><br>
-                👉 👨‍💻 <a href="https://t.me/id_anda" class="latex-style">SEHAN</a>
-            </p>
+                <!-- KLAIM SECTION -->
+                <div class="claim-title">
+                    <i class="fas fa-wallet"></i> KLAIM SALDO HADIAH
+                </div>
+                
+                <p style="font-size: 0.95rem; line-height: 1.6;">
+                    Pemenang yang berhak atas hadiah dapat melakukan klaim dengan cara menghubungi Owner melalui Telegram:
+                    <br><br>
+                    <a href="https://t.me/id_anda" style="color: var(--primary-red); font-weight: 800; text-decoration: none;">
+                        <i class="fab fa-telegram"></i> @SEHAN (HUBUNGI SEKARANG)
+                    </a>
+                </p>
 
-            <table class="info-table">
-                <tr><td>⏰ Jam Klaim</td><td>00.00 WIB</td></tr>
-                <tr><td>📆 Mulai klaim</td><td>17 - 18 Agustus 2026</td></tr>
-                <tr><td>📅 Batas Klaim</td><td>7Hari</td></tr>
-                <tr><td>📌 Metode</td><td>Transfer (tanpa potongan admin)</td></tr>
-            </table>
+                <div class="prize-container" style="background: #fcfcfc;">
+                    <div class="prize-row"><span>⏰ Jam Klaim</span><b>00.00 WIB</b></div>
+                    <div class="prize-row"><span>📆 Mulai Klaim</span><b>17 - 18 Agustus 2026</b></div>
+                    <div class="prize-row"><span>📅 Batas Klaim</span><b>7 Hari</b></div>
+                    <div class="prize-row"><span>📌 Metode</span><b style="color: var(--success);">Transfer (Tanpa Potongan)</b></div>
+                </div>
 
-            <p style="font-size: 14px;">
-                Pemenang yang tidak melakukan klaim pada<br>
-                batas waktu yang telah ditentukan dianggap<br>
-                mengundurkan diri dan hadiah dianggap hangus.
-            </p>
+                <p style="font-size: 0.85rem; color: #777; font-style: italic;">
+                    *Pemenang yang tidak melakukan klaim pada batas waktu yang telah ditentukan dianggap mengundurkan diri dan hadiah hangus.
+                </p>
 
-            <div class="separator">──────────────────────────────────────────</div>
-            
-            <!-- DONATUR SECTION -->
-            <p class="text-bold" style="color:#ff69b4">💝 JADILAH DONATUR! Tambah Hadiah Pemenang!</p>
-            <div class="separator">──────────────────────────────────────────</div>
+                <!-- DONATUR SECTION -->
+                <div style="margin-top: 40px; background: linear-gradient(to right, #fff5f7, #ffffff); padding: 25px; border-radius: 20px; border: 1px solid #ffe3e8;">
+                    <p style="font-weight: 800; color: #ff4d6d; font-size: 1.1rem; margin-top: 0;">
+                        <i class="fas fa-heart"></i> JADILAH DONATUR!
+                    </p>
+                    <p style="font-size: 0.9rem; color: #555;">
+                        Total hadiah dapat bertambah besar apabila semakin banyak donatur yang berpartisipasi. 
+                        Ayo ikut serta memberikan apresiasi kepada para pemenang!
+                    </p>
+                    
+                    <p style="font-weight: 800; font-size: 0.9rem; margin-top: 20px;">✨ Mengapa Menjadi Donatur?</p>
+                    <ul style="font-size: 0.85rem;">
+                        <li>Berkontribusi langsung untuk hadiah pemain</li>
+                        <li>Nama Anda diumumkan secara resmi</li>
+                        <li>Mendukung keberlangsungan komunitas</li>
+                        <li>Proses mudah, cepat, dan aman</li>
+                    </ul>
 
-            <p style="font-size:14px;">
-                Total hadiah yang dibagikan dapat bertambah<br>
-                besar apabila semakin banyak donatur yang<br>
-                berpartisipasi. Ayo ikut serta dalam<br>
-                memberikan apresiasi kepada para pemenang! 💖
-            </p>
+                    <p style="font-weight: 800; font-size: 0.9rem; margin-top: 20px;">📩 Cara Menjadi Donatur:</p>
+                    <ol style="font-size: 0.85rem;">
+                        <li>Hubungi Owner via Telegram <a href="https://t.me/id_anda">@SEHAN</a></li>
+                        <li>Sampaikan nominal donasi Anda</li>
+                        <li>Lakukan pembayaran melalui QRIS resmi</li>
+                        <li>Donasi Anda langsung ditambahkan ke total hadiah! 🎁</li>
+                    </ol>
+                </div>
 
-            <p class="text-bold">✨ Mengapa Menjadi Donatur?</p>
-            <ul>
-                <li>Berkontribusi langsung untuk hadiah pemain</li>
-                <li>Nama Anda bisa di-umumkan sebagai donatur</li>
-                <li>Dukungan Anda sangat berarti bagi komunitas</li>
-                <li>Cara mudah, cepat, dan aman</li>
-            </ul>
+                <p style="text-align: center; font-weight: 800; margin: 40px 0 20px;">
+                    Mari ramaikan Season 7 dan raih posisi teratas Anda! 🇮🇩
+                </p>
 
-            <p class="text-bold" style="margin-top:20px;">📩 Cara Menjadi Donatur:</p>
-            <ol style="font-size:14px; padding-left:20px;">
-                <li>Hubungi Owner melalui username Telegram<br>👉 👨‍💻 <a href="https://t.me/id_anda" class="latex-style">SEHAN</a></li>
-                <li>Sampaikan niat dan nominal donasi Anda</li>
-                <li>Lakukan pembayaran melalui QRIS yang telah disediakan</li>
-                <li>Konfirmasi pembayaran kepada Owner</li>
-                <li>Donasi Anda akan langsung ditambahkan ke total hadiah pemenang Season 7! 🎁</li>
-            </ol>
+                <div class="signature">
+                    <p style="margin:0; font-size: 0.9rem; color: #999;">Salam hormat,</p>
+                    <div class="owner-name">Sehan SA-KA</div>
+                </div>
 
-            <p style="font-style:italic; font-size:13px; margin-top:15px; color:#666;">
-                💡 Berapa pun nominalnya, setiap donasi akan sangat berarti bagi para pemenang.
-            </p>
+                <a href="https://t.me/id_anda" class="cta-button">
+                    <i class="fab fa-telegram-plane"></i> KLAIM HADIAH / HUBUNGI OWNER
+                </a>
 
-            <div class="separator">──────────────────────────────────────────</div>
-            
-            <p style="text-align:center; font-weight:bold; font-size:16px;">
-                Mari ramaikan Season 7 dan raih posisi<br>
-                teratas Anda! 🇮🇩
-            </p>
-            
-            <div style="text-align:center; margin-top:35px;">
-                <p style="margin:0; font-size:14px;">Salam hormat,</p>
-                <p class="latex-style" style="margin-top:8px;">Sehan SA-KA</p>
+                <!-- SUPPORT LOGOS SECTION -->
+                <div class="support-section">
+                    <p class="support-title">Official Support & Partners</p>
+                    <div class="logo-grid">
+                        <!-- Github (Tanpa Link) -->
+                        <div class="logo-item">
+                            <i class="fab fa-github github-icon"></i>
+                        </div>
+                        
+                        <!-- Logo 0 (Link Sambung Kata) -->
+                        <a href="https://t.me/bungkatabot?startgroup=start" class="logo-item" target="_blank">
+                            <img src="logo.png" alt="Logo Support 1" onerror="this.style.display='none';">
+                            <i class="fas fa-robot" id="fallback-1" style="display:none; font-size: 30px; color: var(--primary-red);"></i>
+                        </a>
+
+                        <!-- Logo 1 (Link OSNSX) -->
+                        <a href="https://t.me/osnsxbot" class="logo-item" target="_blank">
+                            <img src="logo1.png" alt="Logo Support 2" onerror="this.style.display='none';">
+                            <i class="fas fa-shield-halved" id="fallback-2" style="display:none; font-size: 30px; color: #0088cc;"></i>
+                        </a>
+
+                        <!-- Logo 2 (Link Drakwe) -->
+                        <a href="https://t.me/drakwebot" class="logo-item" target="_blank">
+                            <img src="logo2.png" alt="Logo Support 3" onerror="this.style.display='none';">
+                            <i class="fas fa-code" id="fallback-3" style="display:none; font-size: 30px; color: #333;"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-
-            <a href="https://t.me/id_anda" class="btn-green-main">KLAIM HADIAH / HUBUNGI OWNER</a>
         </div>
+        
+        <p style="text-align: center; font-size: 0.75rem; color: #aaa; margin: 30px 0;">
+            &copy; 2026 ChBotID Community. Merdeka ke-80 RI.
+        </p>
     </div>
 
     <script>
         function mulaiWeb() {
-            var audio = document.getElementById("laguMerdeka");
-            audio.play().catch(e => console.log("Audio trigger required"));
-            document.getElementById("overlay").style.display = "none";
-            document.getElementById("mainContent").style.display = "block";
-            window.scrollTo(0,0);
+            const audio = document.getElementById("laguMerdeka");
+            const overlay = document.getElementById("overlay");
+            const main = document.getElementById("mainContent");
+
+            // Play Audio
+            audio.play().catch(e => console.log("User interaction required for audio"));
+
+            // Animation Transition
+            overlay.classList.add('hide');
+            
+            setTimeout(() => {
+                overlay.style.display = "none";
+                main.style.display = "block";
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 800);
+        }
+
+        // Script tambahan untuk menangani jika gambar logo belum diupload (sebagai fallback)
+        window.onload = function() {
+            const imgs = document.querySelectorAll('.logo-item img');
+            imgs.forEach((img, index) => {
+                img.onerror = function() {
+                    this.style.display = 'none';
+                    document.getElementById('fallback-' + (index + 1)).style.display = 'block';
+                };
+            });
         }
     </script>
 </body>
