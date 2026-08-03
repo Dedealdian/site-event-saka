@@ -12,10 +12,11 @@
     <style>
         :root {
             --primary-red: #d90429;
-            --dark-red: #8d0801;
             --gold: #ffb703;
-            --deep-navy: #000814;
-            --navy-blue: #001d3d;
+            /* Warna Biru Baru yang Lebih Terang & Hidup */
+            --electric-blue: #0052d4;
+            --azure-blue: #4364f7;
+            --light-blue: #6fb1fc;
             --glass-white: rgba(255, 255, 255, 0.95);
             --text-main: #2b2d42;
             --success: #2b9348;
@@ -41,12 +42,12 @@
             z-index: 1000;
         }
 
-        /* INTRO OVERLAY - NAVY & FIRE EFFECT */
+        /* INTRO OVERLAY - BRIGHTER VIBRANT BLUE */
         #overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Latar belakang Navy/Deep Blue sesuai permintaan */
-            background: radial-gradient(circle at center, var(--navy-blue), var(--deep-navy));
+            /* Gradient Biru yang lebih cerah & sinkron */
+            background: linear-gradient(160deg, var(--electric-blue), var(--azure-blue), var(--light-blue));
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -64,11 +65,11 @@
             display: flex; 
             flex-direction: column; 
             align-items: center; 
-            gap: 30px;
+            gap: 25px;
             width: 100%;
         }
 
-        /* CSS FIRE EFFECT (KODE API) */
+        /* CSS FIRE EFFECT */
         .fire-text {
             font-size: 3.2rem;
             font-weight: 800;
@@ -76,62 +77,67 @@
             text-transform: uppercase;
             color: #fff;
             text-align: center;
-            /* Efek bayangan api berlapis */
+            /* Efek api disesuaikan agar lebih 'pop' di background biru terang */
             text-shadow: 
                 0 -1px 4px #FFF, 
-                0 -2px 10px #ff0, 
-                0 -10px 20px #ff8000, 
-                0 -18px 40px #F00;
-            animation: burn 1.5s infinite alternate linear;
+                0 -3px 12px #ff0, 
+                0 -12px 25px #ff8000, 
+                0 -20px 45px #F00;
+            animation: burn 1.8s infinite alternate linear;
             letter-spacing: 2px;
         }
 
         @keyframes burn {
-            0% { text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00; }
-            50% { text-shadow: 0 -2px 5px #FFF, 0 -3px 12px #ff0, 0 -12px 25px #ff8000, 0 -22px 50px #F00; transform: scale(1.01); }
-            100% { text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00; }
+            0% { transform: scale(1); opacity: 0.95; }
+            50% { transform: scale(1.03); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.95; }
         }
 
-        /* Logo Di Tengah Intro */
+        /* Container Logo Intro */
         .intro-logo-container {
-            position: relative;
-            padding: 10px;
+            background: rgba(255, 255, 255, 0.15); /* Lapisan kaca tipis */
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            animation: float 3s infinite ease-in-out;
         }
 
         .intro-logo-img {
-            width: 180px;
+            width: 200px; /* Ukuran diperbesar */
             height: auto;
             display: block;
-            filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
-            animation: float 3s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); /* Glow tipis agar logo terlihat jelas */
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-10px); }
         }
 
         .start-btn {
-            padding: 20px 60px;
+            padding: 20px 65px;
             font-size: 1.1rem;
             font-weight: 800;
-            background: linear-gradient(45deg, var(--gold), #ff8c00);
-            color: #000;
+            background: #fff; /* Tombol putih di background biru sangat modern */
+            color: var(--electric-blue);
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 15px 35px rgba(255, 183, 3, 0.4);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         .start-btn:hover { 
             transform: scale(1.1); 
-            background: white; 
-            box-shadow: 0 0 30px rgba(255,255,255,0.5);
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 40px rgba(255,183,3,0.6);
         }
 
-        /* MAIN CONTENT AREA */
+        /* MAIN CONTENT AREA (INFORMASI TIDAK DIUBAH) */
         .main-wrapper {
             max-width: 650px;
             margin: 40px auto;
@@ -158,21 +164,15 @@
         .content-padding { padding: 40px 30px; }
 
         .title-section {
-            text-align: center;
-            font-weight: 800;
-            color: var(--primary-red);
-            font-size: 1.6rem;
-            margin-bottom: 25px;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
+            text-align: center; font-weight: 800; color: var(--primary-red);
+            font-size: 1.6rem; margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 10px;
         }
 
         .intro-text {
-            font-family: 'Playfair Display', serif;
-            font-style: italic; color: #555; text-align: center;
-            line-height: 1.8; font-size: 1.05rem; margin-bottom: 30px;
+            font-family: 'Playfair Display', serif; font-style: italic; color: #555; 
+            text-align: center; line-height: 1.8; font-size: 1.05rem; margin-bottom: 30px;
         }
 
-        /* Tabel Hadiah */
         .prize-container {
             background: #fff; border-radius: 20px; padding: 10px;
             box-shadow: inset 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 30px;
@@ -186,21 +186,17 @@
         .amount { color: var(--success); font-weight: 800; }
 
         .info-box {
-            background: #fdf2f2; padding: 20px; border-radius: 15px;
-            margin: 25px 0; text-align: center;
+            background: #fdf2f2; padding: 20px; border-radius: 15px; margin: 25px 0; text-align: center;
         }
 
         .claim-title {
-            color: var(--success); font-weight: 800; font-size: 1.4rem;
-            margin-bottom: 15px; display: flex; align-items: center; gap: 10px;
+            color: var(--success); font-weight: 800; font-size: 1.4rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;
         }
 
-        /* Buttons & List */
         .cta-button {
             display: flex; align-items: center; justify-content: center; gap: 10px;
             background: var(--success); color: white !important;
-            text-decoration: none; padding: 20px; border-radius: 15px;
-            font-weight: 800; margin-top: 30px; transition: 0.3s;
+            text-decoration: none; padding: 20px; border-radius: 15px; font-weight: 800; margin-top: 30px;
         }
 
         /* SUPPORT SECTION LOGOS */
@@ -208,8 +204,7 @@
             margin-top: 50px; padding: 20px 0; border-top: 2px dashed #ddd;
         }
         .support-title {
-            text-align: center; font-size: 0.8rem; color: #999;
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;
+            text-align: center; font-size: 0.8rem; color: #999; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;
         }
         .logo-grid {
             display: flex; justify-content: center; align-items: center; gap: 25px; flex-wrap: wrap;
@@ -229,7 +224,7 @@
 
         @media (max-width: 480px) {
             .fire-text { font-size: 2.2rem; }
-            .intro-logo-img { width: 140px; }
+            .intro-logo-img { width: 160px; }
             .content-padding { padding: 30px 20px; }
         }
     </style>
@@ -242,7 +237,7 @@
             <!-- Teks dengan Kode Api CSS -->
             <h1 class="fire-text">Event Sambung Kata</h1>
             
-            <!-- Logo PNG Center -->
+            <!-- Logo PNG Center dengan Glass Effect -->
             <div class="intro-logo-container">
                 <img src="logo.png" alt="ChBotID Logo" class="intro-logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/8644/8644342.png'">
             </div>
@@ -259,14 +254,12 @@
         <source src="https://archive.org/download/HariMerdeka/Hari%20Merdeka.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Main Content Area -->
+    <!-- Main Content Area (Semua Teks Dipertahankan) -->
     <div class="main-wrapper" id="mainContent">
         <div class="card">
-            <!-- Header Image -->
             <img src="foto.png" alt="Banner Merdeka" class="header-banner">
 
             <div class="content-padding">
-                <!-- HEADER CONTENT -->
                 <div class="title-section">
                     <i class="fas fa-trophy" style="color: var(--gold);"></i>
                     <span>HADIAH SPESIAL SEASON 7</span>
@@ -278,7 +271,6 @@
                     Bot Sambung Kata mempersembahkan Season 7 dengan hadiah istimewa bagi para pemenang."
                 </div>
 
-                <!-- PRIZE SECTION -->
                 <p style="font-weight: 800; margin-bottom: 15px;"><i class="fas fa-award"></i> HADIAH RESMI OWNER</p>
                 <div class="prize-container">
                     <div class="prize-row"><span class="rank">🥇 Peringkat 1</span><span class="amount">Rp30.000</span></div>
@@ -294,7 +286,6 @@
 
                 <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
 
-                <!-- KLAIM SECTION -->
                 <div class="claim-title"><i class="fas fa-wallet"></i> KLAIM SALDO HADIAH</div>
                 <p style="font-size: 0.95rem; line-height: 1.6;">
                     Pemenang yang berhak atas hadiah dapat menghubungi Owner melalui Telegram:<br><br>
@@ -314,11 +305,9 @@
                     *Pemenang yang tidak melakukan klaim pada batas waktu yang telah ditentukan dianggap mengundurkan diri dan hadiah hangus.
                 </p>
 
-                <!-- DONATUR SECTION -->
                 <div style="background: linear-gradient(to right, #fff5f7, #ffffff); padding: 25px; border-radius: 20px; border: 1px solid #ffe3e8;">
                     <p style="font-weight: 800; color: #ff4d6d; font-size: 1.1rem; margin-top: 0;"><i class="fas fa-heart"></i> JADILAH DONATUR!</p>
                     <p style="font-size: 0.9rem; color: #555;">Total hadiah dapat bertambah besar apabila semakin banyak donatur yang berpartisipasi. Ayo ikut serta dalam memberikan apresiasi kepada para pemenang! 💖</p>
-                    
                     <p style="font-weight: 800; font-size: 0.9rem; margin-top: 20px;">✨ Mengapa Menjadi Donatur?</p>
                     <ul style="font-size: 0.85rem; padding-left: 20px;">
                         <li>Berkontribusi langsung untuk hadiah pemain</li>
@@ -326,7 +315,6 @@
                         <li>Dukungan Anda sangat berarti bagi komunitas</li>
                         <li>Cara mudah, cepat, dan aman</li>
                     </ul>
-
                     <p style="font-weight: 800; font-size: 0.9rem; margin-top: 20px;">📩 Cara Menjadi Donatur:</p>
                     <ol style="font-size: 0.85rem; padding-left: 20px;">
                         <li>Hubungi Owner melalui username Telegram 👉 <a href="https://t.me/id_anda">@SEHAN</a></li>
@@ -347,7 +335,6 @@
                     <i class="fab fa-telegram-plane"></i> KLAIM HADIAH / HUBUNGI OWNER
                 </a>
 
-                <!-- SUPPORT LOGOS SECTION -->
                 <div class="support-section">
                     <p class="support-title">Official Support & Partners</p>
                     <div class="logo-grid">
@@ -367,11 +354,7 @@
             const audio = document.getElementById("laguMerdeka");
             const overlay = document.getElementById("overlay");
             const main = document.getElementById("mainContent");
-
-            // Play Music
             audio.play().catch(e => console.log("Audio trigger required"));
-
-            // Transition
             overlay.classList.add('hide');
             setTimeout(() => {
                 overlay.style.display = "none";
