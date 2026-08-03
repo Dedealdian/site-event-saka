@@ -9,6 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Firebase SDK (Untuk Realtime Data) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
     <style>
         :root {
             --primary-red: #d90429;
@@ -32,7 +36,6 @@
             min-height: 100vh;
         }
 
-        /* Border Atas Bendera */
         body::before {
             content: "";
             position: fixed;
@@ -63,12 +66,11 @@
             display: flex; 
             flex-direction: column; 
             align-items: center; 
-            gap: 20px;
+            gap: 15px;
             width: 100%;
             max-width: 500px;
         }
 
-        /* CSS FIRE EFFECT */
         .fire-text {
             font-size: 3.2rem;
             font-weight: 800;
@@ -86,7 +88,6 @@
             100% { transform: scale(1); opacity: 0.95; }
         }
 
-        /* Teks Deskripsi Pengganti Logo */
         .intro-desc-container {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -106,6 +107,25 @@
             text-align: center;
         }
 
+        /* TOMBOL KE HALAMAN DATA */
+        .btn-to-data {
+            background: var(--gold);
+            color: #000;
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: none;
+            font-weight: 800;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-to-data:hover { transform: scale(1.05); background: white; }
+
         .start-btn {
             padding: 18px 50px;
             font-size: 1.1rem;
@@ -118,16 +138,100 @@
             transition: all 0.3s;
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 10px;
-        }
-        .start-btn:hover { 
-            transform: scale(1.05); 
-            background: var(--gold);
-            color: #000;
         }
 
-        /* MAIN CONTENT AREA */
+        /* SECTION HALAMAN DATA TABEL */
+        #dataSection {
+            display: none;
+            max-width: 650px;
+            margin: 40px auto;
+            padding: 0 15px;
+            animation: slideUp 0.6s ease;
+        }
+
+        .table-card {
+            background: var(--glass-white);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border: 1px solid white;
+        }
+
+        .table-header-title {
+            text-align: center;
+            font-weight: 800;
+            color: var(--electric-blue);
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        th {
+            background: var(--electric-blue);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .edit-mode input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        /* CATATAN & KUTIPAN */
+        .note-title {
+            font-weight: 800;
+            color: #333;
+            display: block;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .quote-box {
+            background: #fffbe6;
+            border-left: 5px solid #ffe58f;
+            padding: 20px;
+            border-radius: 0 15px 15px 0;
+            margin-bottom: 20px;
+        }
+
+        .quote-text {
+            margin: 0;
+            font-style: italic;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .quote-text a {
+            color: var(--electric-blue);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        /* MAIN WRAPPER */
         .main-wrapper {
             max-width: 650px;
             margin: 40px auto;
@@ -141,14 +245,10 @@
             border-radius: 30px;
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255,255,255,0.8);
         }
 
         .header-banner {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-bottom: 4px solid var(--primary-red);
+            width: 100%; height: 250px; object-fit: cover; border-bottom: 4px solid var(--primary-red);
         }
 
         .content-padding { padding: 40px 30px; }
@@ -158,29 +258,12 @@
             font-size: 1.6rem; margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 10px;
         }
 
-        .intro-text {
-            font-family: 'Playfair Display', serif; font-style: italic; color: #555; 
-            text-align: center; line-height: 1.8; font-size: 1.05rem; margin-bottom: 30px;
-        }
-
         .prize-container {
             background: #fff; border-radius: 20px; padding: 10px;
             box-shadow: inset 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 30px;
         }
         .prize-row {
-            display: flex; justify-content: space-between;
-            padding: 15px 20px; border-bottom: 1px solid #f0f0f0;
-        }
-        .prize-row:last-child { border: none; }
-        .rank { font-weight: 800; display: flex; align-items: center; gap: 10px; }
-        .amount { color: var(--success); font-weight: 800; }
-
-        .info-box {
-            background: #fdf2f2; padding: 20px; border-radius: 15px; margin: 25px 0; text-align: center;
-        }
-
-        .claim-title {
-            color: var(--success); font-weight: 800; font-size: 1.4rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px;
+            display: flex; justify-content: space-between; padding: 15px 20px; border-bottom: 1px solid #f0f0f0;
         }
 
         .cta-button {
@@ -189,23 +272,18 @@
             text-decoration: none; padding: 20px; border-radius: 15px; font-weight: 800; margin-top: 30px;
         }
 
-        /* SUPPORT SECTION */
-        .support-section {
-            margin-top: 50px; padding: 20px 0; border-top: 2px dashed #ddd;
+        /* TOMBOL ADMIN TERSEMBUNYI */
+        #adminLock {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            opacity: 0.15;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            font-size: 1.2rem;
         }
-        .support-title {
-            text-align: center; font-size: 0.8rem; color: #999; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;
-        }
-        .logo-grid {
-            display: flex; justify-content: center; align-items: center; gap: 25px; flex-wrap: wrap;
-        }
-        .logo-item { transition: all 0.3s ease; filter: grayscale(100%); opacity: 0.7; }
-        .logo-item:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.1); }
-        .logo-item img { height: 40px; width: auto; display: block; }
-        .github-icon { font-size: 35px; color: #333; }
-
-        .signature { text-align: center; margin-top: 40px; }
-        .owner-name { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--primary-red); font-size: 1.3rem; }
 
         @keyframes slideUp { 
             from { opacity: 0; transform: translateY(30px); } 
@@ -214,19 +292,20 @@
 
         @media (max-width: 480px) {
             .fire-text { font-size: 2.2rem; }
-            .intro-desc-text { font-size: 0.9rem; }
             .content-padding { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Ikon Gembok Admin (Samar di Pojok Kanan Bawah) -->
+    <button id="adminLock" onclick="loginAdmin()"><i class="fas fa-lock"></i></button>
+
     <!-- Intro Overlay -->
     <div id="overlay">
         <div class="overlay-content">
             <h1 class="fire-text">Event Sambung Kata</h1>
             
-            <!-- Deskripsi Teks sesuai permintaan -->
             <div class="intro-desc-container">
                 <p class="intro-desc-text">
                     Website event sambung kata pertahun.<br>
@@ -234,9 +313,13 @@
                     Membuat pemain tidak jenuh di dalam server.<br>
                     Open donasi jika ingin ikut kontribusi.
                 </p>
+
+                <!-- Tombol Menuju Tabel Data -->
+                <button class="btn-to-data" onclick="bukaHalamanData()">
+                    <i class="fas fa-list-ol"></i> Data Top 1 Saka Saat Ini
+                </button>
             </div>
 
-            <!-- Tombol Buka -->
             <button class="start-btn" onclick="mulaiWeb()">
                 Buka Sekarang <i class="fas fa-fire-alt" style="margin-left: 10px;"></i>
             </button>
@@ -248,11 +331,70 @@
         <source src="https://archive.org/download/HariMerdeka/Hari%20Merdeka.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- HALAMAN DATA TABEL (HIDDEN) -->
+    <div id="dataSection">
+        <div class="table-card">
+            <div class="table-header-title">Data Top 1 Saka Saat Ini</div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Point</th>
+                        <th>Peringkat</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Baris 1 -->
+                    <tr>
+                        <td id="cell_n1">Memuat...</td>
+                        <td id="cell_p1">-</td>
+                        <td id="cell_r1">-</td>
+                    </tr>
+                    <!-- Baris 2 -->
+                    <tr>
+                        <td id="cell_n2">Memuat...</td>
+                        <td id="cell_p2">-</td>
+                        <td id="cell_r2">-</td>
+                    </tr>
+                    <!-- Baris 3 -->
+                    <tr>
+                        <td id="cell_n3">Memuat...</td>
+                        <td id="cell_p3">-</td>
+                        <td id="cell_r3">-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Tombol Simpan (Hanya muncul saat login admin) -->
+            <div id="adminControls" style="display:none; text-align: center; margin-bottom: 25px;">
+                <button onclick="saveRealtime()" class="btn-to-data" style="background: var(--success); color: white;">
+                    <i class="fas fa-save"></i> SIMPAN PERUBAHAN
+                </button>
+            </div>
+
+            <!-- Bagian Catatan Sesuai Permintaan -->
+            <span class="note-title">⚠️Catatan⚠️</span>
+            <div class="quote-box">
+                <p class="quote-text">
+                    "Data ini adalah data klasemen pertama. Dapat berubah bila peringkat /top 
+                    <a href="https://t.me/bungkatabot" target="_blank">@bungkatabot</a> berubah. 
+                    <a href="https://t.me/bungkatabot?startgroup=start" target="_blank">Mainkan sambung kata agar nama anda ada disini.</a>"
+                </p>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="#" onclick="location.reload()" style="text-decoration: none; color: #999; font-weight: 700;">
+                    <i class="fas fa-arrow-left"></i> Kembali ke Awal
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Content Area -->
     <div class="main-wrapper" id="mainContent">
         <div class="card">
             <img src="foto.png" alt="Banner Merdeka" class="header-banner">
-
             <div class="content-padding">
                 <div class="title-section">
                     <i class="fas fa-trophy" style="color: var(--gold);"></i>
@@ -260,105 +402,114 @@
                     <i class="fas fa-trophy" style="color: var(--gold);"></i>
                 </div>
 
-                <div class="intro-text">
+                <div class="intro-text" style="text-align: center; font-style: italic; margin-bottom: 30px; color: #555;">
                     "Dalam rangka memperingati Hari Kemerdekaan Republik Indonesia yang ke-80, 
                     Bot Sambung Kata mempersembahkan Season 7 dengan hadiah istimewa bagi para pemenang."
                 </div>
 
-                <p style="font-weight: 800; margin-bottom: 15px;"><i class="fas fa-award"></i> HADIAH RESMI OWNER</p>
                 <div class="prize-container">
-                    <div class="prize-row"><span class="rank">🥇 Peringkat 1</span><span class="amount">Rp30.000</span></div>
-                    <div class="prize-row"><span class="rank">🥈 Peringkat 2</span><span class="amount">Rp20.000</span></div>
-                    <div class="prize-row"><span class="rank">🥉 Peringkat 3</span><span class="amount">Rp10.000</span></div>
-                </div>
-
-                <div class="info-box">
-                    <p style="margin:0; font-weight: bold; font-style: italic; color: var(--dark-red);">
-                        Selamat kepada para pemain yang berhasil menempati posisi podium Season 7! 🎊
-                    </p>
-                </div>
-
-                <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
-
-                <div class="claim-title"><i class="fas fa-wallet"></i> KLAIM SALDO HADIAH</div>
-                <p style="font-size: 0.95rem; line-height: 1.6;">
-                    Pemenang yang berhak atas hadiah dapat menghubungi Owner melalui Telegram:<br><br>
-                    <a href="https://t.me/id_anda" style="color: var(--primary-red); font-weight: 800; text-decoration: none;">
-                        <i class="fab fa-telegram"></i> @SEHAN (HUBUNGI SEKARANG)
-                    </a>
-                </p>
-
-                <div class="prize-container" style="background: #fcfcfc;">
-                    <div class="prize-row"><span>⏰ Jam Klaim</span><b>00.00 WIB</b></div>
-                    <div class="prize-row"><span>📆 Mulai Klaim</span><b>17 - 18 Agustus 2026</b></div>
-                    <div class="prize-row"><span>📅 Batas Klaim</span><b>7 Hari</b></div>
-                    <div class="prize-row"><span>📌 Metode</span><b style="color: var(--success);">Transfer (Tanpa Potongan)</b></div>
-                </div>
-
-                <p style="font-size: 0.85rem; color: #777; font-style: italic; margin-bottom: 30px;">
-                    *Pemenang yang tidak melakukan klaim pada batas waktu yang telah ditentukan dianggap mengundurkan diri dan hadiah hangus.
-                </p>
-
-                <div style="background: linear-gradient(to right, #fff5f7, #ffffff); padding: 25px; border-radius: 20px; border: 1px solid #ffe3e8;">
-                    <p style="font-weight: 800; color: #ff4d6d; font-size: 1.1rem; margin-top: 0;"><i class="fas fa-heart"></i> JADILAH DONATUR!</p>
-                    <p style="font-size: 0.9rem; color: #555;">Total hadiah dapat bertambah besar apabila semakin banyak donatur yang berpartisipasi. Ayo ikut serta dalam memberikan apresiasi kepada para pemenang! 💖</p>
-                    <p style="font-weight: 800; font-size: 0.9rem; margin-top: 20px;">✨ Mengapa Menjadi Donatur?</p>
-                    <ul style="font-size: 0.85rem; padding-left: 20px;">
-                        <li>Berkontribusi langsung untuk hadiah pemain</li>
-                        <li>Nama Anda bisa di-umumkan sebagai donatur</li>
-                        <li>Dukungan Anda sangat berarti bagi komunitas</li>
-                        <li>Cara mudah, cepat, dan aman</li>
-                    </ul>
-                    <p style="font-weight: 800; font-size: 0.9rem; margin-top: 20px;">📩 Cara Menjadi Donatur:</p>
-                    <ol style="font-size: 0.85rem; padding-left: 20px;">
-                        <li>Hubungi Owner melalui username Telegram 👉 <a href="https://t.me/id_anda">@SEHAN</a></li>
-                        <li>Sampaikan niat dan nominal donasi Anda</li>
-                        <li>Lakukan pembayaran melalui QRIS yang disediakan</li>
-                        <li>Konfirmasi pembayaran kepada Owner</li>
-                    </ol>
-                </div>
-
-                <p style="text-align: center; font-weight: 800; margin: 40px 0 20px;">Mari ramaikan Season 7 dan raih posisi teratas Anda! 🇮🇩</p>
-
-                <div class="signature">
-                    <p style="margin:0; font-size: 0.9rem; color: #999;">Salam hormat,</p>
-                    <div class="owner-name">Sehan SA-KA</div>
+                    <div class="prize-row"><span style="font-weight:800;">🥇 Peringkat 1</span><span style="color:var(--success); font-weight:800;">Rp30.000</span></div>
+                    <div class="prize-row"><span style="font-weight:800;">🥈 Peringkat 2</span><span style="color:var(--success); font-weight:800;">Rp20.000</span></div>
+                    <div class="prize-row"><span style="font-weight:800;">🥉 Peringkat 3</span><span style="color:var(--success); font-weight:800;">Rp10.000</span></div>
                 </div>
 
                 <a href="https://t.me/id_anda" class="cta-button">
-                    <i class="fab fa-telegram-plane"></i> KLAIM HADIAH / HUBUNGI OWNER
+                    <i class="fab fa-telegram-plane"></i> HUBUNGI OWNER / KLAIM
                 </a>
-
-                <div class="support-section">
-                    <p class="support-title">Official Support & Partners</p>
-                    <div class="logo-grid">
-                        <div class="logo-item"><i class="fab fa-github github-icon"></i></div>
-                        <a href="https://t.me/bungkatabot?startgroup=start" class="logo-item" target="_blank"><img src="logo.png" alt="Logo 0"></a>
-                        <a href="https://t.me/osnsxbot" class="logo-item" target="_blank"><img src="logo1.png" alt="Logo 1"></a>
-                        <a href="https://t.me/drakwebot" class="logo-item" target="_blank"><img src="logo2.png" alt="Logo 2"></a>
-                        <!-- Logo 4 dengan Link yang diminta -->
-                        <a href="https://website-official-gelisah.up.railway.app" class="logo-item" target="_blank">
-                            <img src="logo4.png" alt="Logo 4">
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
-        <p style="text-align: center; font-size: 0.75rem; color: #aaa; margin: 30px 0;">&copy; 2026 ChBotID Community. Merdeka ke-80 RI.</p>
+        <p style="text-align: center; font-size: 0.75rem; color: #aaa; margin: 30px 0;">&copy; 2026 ChBotID Community.</p>
     </div>
 
     <script>
+        // CONFIG FIREBASE MILIK ANDA
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQG-NkD9rLLtIFOXBCfdNZ_yFRfx6LPrg",
+            authDomain: "mesin-capit-bd535.firebaseapp.com",
+            databaseURL: "https://mesin-capit-bd535-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "mesin-capit-bd535",
+            storageBucket: "mesin-capit-bd535.firebasestorage.app",
+            messagingSenderId: "978657704206",
+            appId: "1:978657704206:web:ee29d7ce6007d3fed93f5f",
+            measurementId: "G-S4YD815KXP"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // Navigasi
         function mulaiWeb() {
-            const audio = document.getElementById("laguMerdeka");
-            const overlay = document.getElementById("overlay");
-            const main = document.getElementById("mainContent");
-            audio.play().catch(e => console.log("Audio trigger required"));
-            overlay.classList.add('hide');
+            document.getElementById("laguMerdeka").play().catch(e => console.log("Muted"));
+            document.getElementById("overlay").classList.add('hide');
             setTimeout(() => {
-                overlay.style.display = "none";
-                main.style.display = "block";
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                document.getElementById("overlay").style.display = "none";
+                document.getElementById("mainContent").style.display = "block";
             }, 800);
+        }
+
+        function bukaHalamanData() {
+            document.getElementById("overlay").classList.add('hide');
+            setTimeout(() => {
+                document.getElementById("overlay").style.display = "none";
+                document.getElementById("dataSection").style.display = "block";
+                loadDataRealtime();
+            }, 800);
+        }
+
+        // Realtime Data Ambil dari Firebase
+        function loadDataRealtime() {
+            db.ref('top_saka').on('value', (snapshot) => {
+                const data = snapshot.val();
+                if(data) {
+                    for(let i=1; i<=3; i++) {
+                        if(!isAdminActive) {
+                            document.getElementById(`cell_n${i}`).innerText = data[`user${i}`].nama;
+                            document.getElementById(`cell_p${i}`).innerText = data[`user${i}`].point;
+                            document.getElementById(`cell_r${i}`).innerText = data[`user${i}`].rank;
+                        }
+                    }
+                }
+            });
+        }
+
+        // Fitur Admin
+        let isAdminActive = false;
+        function loginAdmin() {
+            const pass = prompt("Masukkan Password Owner:");
+            if(pass === "tidak1") {
+                isAdminActive = true;
+                alert("Mode Edit Aktif!");
+                document.getElementById("adminControls").style.display = "block";
+                enableEditMode();
+            } else {
+                alert("Password Salah!");
+            }
+        }
+
+        function enableEditMode() {
+            for(let i=1; i<=3; i++) {
+                const n = document.getElementById(`cell_n${i}`);
+                const p = document.getElementById(`cell_p${i}`);
+                const r = document.getElementById(`cell_r${i}`);
+                n.innerHTML = `<input type="text" id="edit_n${i}" value="${n.innerText}">`;
+                p.innerHTML = `<input type="text" id="edit_p${i}" value="${p.innerText}">`;
+                r.innerHTML = `<input type="text" id="edit_r${i}" value="${r.innerText}">`;
+            }
+        }
+
+        function saveRealtime() {
+            const updates = {};
+            for(let i=1; i<=3; i++) {
+                updates[`user${i}`] = {
+                    nama: document.getElementById(`edit_n${i}`).value,
+                    point: document.getElementById(`edit_p${i}`).value,
+                    rank: document.getElementById(`edit_r${i}`).value
+                };
+            }
+            db.ref('top_saka').set(updates).then(() => {
+                alert("Berhasil! Data berubah di semua perangkat.");
+                location.reload();
+            });
         }
     </script>
 </body>
