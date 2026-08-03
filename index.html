@@ -13,7 +13,6 @@
         :root {
             --primary-red: #d90429;
             --gold: #ffb703;
-            /* Warna Biru Baru yang Lebih Terang & Hidup */
             --electric-blue: #0052d4;
             --azure-blue: #4364f7;
             --light-blue: #6fb1fc;
@@ -42,11 +41,10 @@
             z-index: 1000;
         }
 
-        /* INTRO OVERLAY - BRIGHTER VIBRANT BLUE */
+        /* INTRO OVERLAY */
         #overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Gradient Biru yang lebih cerah & sinkron */
             background: linear-gradient(160deg, var(--electric-blue), var(--azure-blue), var(--light-blue));
             z-index: 9999;
             display: flex;
@@ -65,8 +63,9 @@
             display: flex; 
             flex-direction: column; 
             align-items: center; 
-            gap: 25px;
+            gap: 20px;
             width: 100%;
+            max-width: 500px;
         }
 
         /* CSS FIRE EFFECT */
@@ -76,13 +75,7 @@
             margin: 0;
             text-transform: uppercase;
             color: #fff;
-            text-align: center;
-            /* Efek api disesuaikan agar lebih 'pop' di background biru terang */
-            text-shadow: 
-                0 -1px 4px #FFF, 
-                0 -3px 12px #ff0, 
-                0 -12px 25px #ff8000, 
-                0 -20px 45px #F00;
+            text-shadow: 0 -1px 4px #FFF, 0 -3px 12px #ff0, 0 -12px 25px #ff8000, 0 -20px 45px #F00;
             animation: burn 1.8s infinite alternate linear;
             letter-spacing: 2px;
         }
@@ -93,39 +86,31 @@
             100% { transform: scale(1); opacity: 0.95; }
         }
 
-        /* Container Logo Intro - Dibuat lebih menyatu (Glassmorphism) */
-        .intro-logo-container {
-            background: rgba(255, 255, 255, 0.1); 
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 40px;
-            border-radius: 40px;
-            border: 1.5px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15), inset 0 0 20px rgba(255,255,255,0.1);
-            animation: float 3s infinite ease-in-out;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        /* Teks Deskripsi Pengganti Logo */
+        .intro-desc-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 10px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        .intro-logo-img {
-            width: 220px; /* Ukuran lebih besar agar jelas */
-            height: auto;
-            display: block;
-            /* Filter untuk membuat logo transparan gelap jadi lebih menyatu & terang */
-            filter: drop-shadow(0 0 15px rgba(255,255,255,0.6)) brightness(1.1);
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+        .intro-desc-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin: 0;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+            text-align: center;
         }
 
         .start-btn {
-            padding: 20px 65px;
+            padding: 18px 50px;
             font-size: 1.1rem;
             font-weight: 800;
-            background: #fff; /* Tombol putih di background biru sangat modern */
+            background: #fff;
             color: var(--electric-blue);
             border: none;
             border-radius: 50px;
@@ -134,12 +119,12 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-top: 10px;
         }
         .start-btn:hover { 
-            transform: scale(1.1); 
+            transform: scale(1.05); 
             background: var(--gold);
             color: #000;
-            box-shadow: 0 0 40px rgba(255,183,3,0.6);
         }
 
         /* MAIN CONTENT AREA */
@@ -204,7 +189,7 @@
             text-decoration: none; padding: 20px; border-radius: 15px; font-weight: 800; margin-top: 30px;
         }
 
-        /* SUPPORT SECTION LOGOS */
+        /* SUPPORT SECTION */
         .support-section {
             margin-top: 50px; padding: 20px 0; border-top: 2px dashed #ddd;
         }
@@ -229,8 +214,7 @@
 
         @media (max-width: 480px) {
             .fire-text { font-size: 2.2rem; }
-            .intro-logo-img { width: 180px; }
-            .intro-logo-container { padding: 30px; }
+            .intro-desc-text { font-size: 0.9rem; }
             .content-padding { padding: 30px 20px; }
         }
     </style>
@@ -240,12 +224,16 @@
     <!-- Intro Overlay -->
     <div id="overlay">
         <div class="overlay-content">
-            <!-- Teks dengan Kode Api CSS -->
             <h1 class="fire-text">Event Sambung Kata</h1>
             
-            <!-- Logo Intro Menggunakan logo3.png -->
-            <div class="intro-logo-container">
-                <img src="logo3.png" alt="ChBotID Logo" class="intro-logo-img" onerror="this.src='https://cdn-icons-png.flaticon.com/512/8644/8644342.png'">
+            <!-- Deskripsi Teks sesuai permintaan -->
+            <div class="intro-desc-container">
+                <p class="intro-desc-text">
+                    Website event sambung kata pertahun.<br>
+                    Memberikan apresiasi berbentuk saldo digital yang nyata.<br>
+                    Membuat pemain tidak jenuh di dalam server.<br>
+                    Open donasi jika ingin ikut kontribusi.
+                </p>
             </div>
 
             <!-- Tombol Buka -->
@@ -348,8 +336,10 @@
                         <a href="https://t.me/bungkatabot?startgroup=start" class="logo-item" target="_blank"><img src="logo.png" alt="Logo 0"></a>
                         <a href="https://t.me/osnsxbot" class="logo-item" target="_blank"><img src="logo1.png" alt="Logo 1"></a>
                         <a href="https://t.me/drakwebot" class="logo-item" target="_blank"><img src="logo2.png" alt="Logo 2"></a>
-                        <!-- Menambahkan logo4.png di sini -->
-                        <a href="#" class="logo-item" target="_blank"><img src="logo4.png" alt="Logo 4"></a>
+                        <!-- Logo 4 dengan Link yang diminta -->
+                        <a href="https://website-official-gelisah.up.railway.app" class="logo-item" target="_blank">
+                            <img src="logo4.png" alt="Logo 4">
+                        </a>
                     </div>
                 </div>
             </div>
