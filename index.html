@@ -3,35 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChBotID - Pengumuman Resmi Season 7</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>ChBotID - Official Season 7</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-blue: #004e92;
-            --light-blue: #0088cc;
-            --text-dark: #1a1a2e;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #38bdf8;
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --glass: rgba(255, 255, 255, 0.8);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: #ffffff;
-            /* Pola Corak Mega Mendung (SVG Pattern) */
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Cpath d='M0 100 Q50 50 100 100 T200 100 T300 100 T400 100' fill='none' stroke='%230088cc' stroke-width='1' opacity='0.1'/%3E%3Cpath d='M0 120 Q50 70 100 120 T200 120 T300 120 T400 120' fill='none' stroke='%230088cc' stroke-width='1' opacity='0.05'/%3E%3C/svg%3E");
-            color: var(--text-dark);
+            background: var(--bg-gradient);
+            color: var(--text-main);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            overflow-x: hidden;
+            /* Modernized Mega Mendung Pattern */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M10 50 Q25 25 40 50 T70 50 T100 50' fill='none' stroke='%232563eb' stroke-width='0.5' opacity='0.05'/%3E%3C/svg%3E");
         }
 
-        /* --- LAYAR AWAL (WELCOME) --- */
+        /* --- LOADING / WELCOME SCREEN --- */
         #welcome-screen {
             position: fixed;
             inset: 0;
@@ -39,143 +40,218 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 100;
-            background: white;
-            transition: opacity 0.8s ease;
+            z-index: 1000;
+            background: #ffffff;
+            transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .welcome-content {
+            text-align: center;
+            animation: fadeInScale 0.8s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .welcome-logo {
-            width: 140px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
-            animation: float 4s ease-in-out infinite;
+            width: 120px;
+            margin-bottom: 24px;
+            filter: drop-shadow(0 10px 20px rgba(37, 99, 235, 0.2));
+            animation: float 3s ease-in-out infinite;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-15px); }
         }
 
         .btn-open {
-            background: var(--primary-blue);
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 12px 50px;
-            border-radius: 5px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            padding: 16px 48px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 1px;
             cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 78, 146, 0.3);
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn-open:hover { background: var(--light-blue); transform: translateY(-2px); }
+        .btn-open:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: var(--primary-dark);
+            box-shadow: 0 15px 30px rgba(37, 99, 235, 0.4);
+        }
 
-        /* --- KONTEN UTAMA --- */
+        .btn-open:active {
+            transform: scale(0.95);
+        }
+
+        /* --- MAIN CONTENT --- */
         #main-content {
             display: none;
             opacity: 0;
-            width: 100%;
-            max-width: 650px;
-            padding: 50px 20px;
-            transition: opacity 1s ease;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
         }
 
         .header-section {
-            border-bottom: 2px solid var(--primary-blue);
-            padding-bottom: 20px;
-            margin-bottom: 40px;
+            text-align: center;
+            margin-bottom: 50px;
         }
 
-        h1 { font-size: 1.8rem; font-weight: 800; color: var(--primary-blue); }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #1e40af, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
 
         .gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
         }
 
         .card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
             background: white;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            border: 1px solid #eee;
         }
 
         .card img {
             width: 100%;
-            border-radius: 5px;
-            cursor: zoom-in;
-            transition: 0.4s;
+            border-radius: 18px;
+            display: block;
+            transition: transform 0.5s ease;
         }
 
-        .card img:hover { opacity: 0.9; }
+        .card:hover img {
+            transform: scale(1.02);
+        }
 
         .caption {
-            margin-top: 15px;
-            font-size: 0.95rem;
-            color: #444;
-            padding: 5px;
+            padding: 20px 10px;
+            text-align: left;
         }
 
-        .caption a {
-            color: var(--light-blue);
-            text-decoration: none;
+        .rank-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
             font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
-        .caption a:hover { text-decoration: underline; }
+        .rank-1 { background: #fef3c7; color: #92400e; }
+        .rank-2 { background: #e2e8f0; color: #475569; }
+        .rank-3 { background: #ffedd5; color: #9a3412; }
+
+        .winner-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .winner-name:hover { color: var(--primary); }
 
         /* --- MODAL PREVIEW --- */
         #imageModal {
             position: fixed;
             inset: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 200;
-            flex-direction: column;
-            cursor: pointer;
+            z-index: 2000;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         #modalImg {
-            max-width: 90%;
-            max-height: 80vh;
-            border-radius: 10px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-            transform: scale(0.9);
-            transition: 0.3s;
+            max-width: 95%;
+            max-height: 85vh;
+            border-radius: 20px;
+            transform: scale(0.8);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
 
-        /* Tombol Unduh (Kecil & Simbol Saja) */
-        .download-btn {
-            margin-top: 20px;
-            background: var(--primary-blue);
-            width: 45px;
-            height: 45px;
+        .modal-actions {
+            position: absolute;
+            bottom: 40px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .action-btn {
+            background: white;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
+            text-decoration: none;
             transition: 0.3s;
-            cursor: pointer;
             border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        .download-btn:hover { background: var(--light-blue); transform: scale(1.1); }
-        .download-btn svg { width: 22px; height: 22px; fill: white; }
-
-        .footer-logo {
-            margin-top: 60px;
-            width: 100px;
-            opacity: 0.7;
+        .action-btn:hover {
+            transform: scale(1.1);
+            background: var(--primary);
         }
 
-        .fade-out { opacity: 0 !important; pointer-events: none; }
+        .action-btn svg { width: 24px; fill: #1e293b; transition: 0.3s; }
+        .action-btn:hover svg { fill: white; }
+
+        footer {
+            margin-top: 80px;
+            padding-bottom: 40px;
+            text-align: center;
+            opacity: 0.6;
+        }
+
+        /* --- UTILS --- */
+        .fade-out { opacity: 0 !important; visibility: hidden; }
+        .show-content { display: block !important; opacity: 1 !important; transform: translateY(0) !important; }
+
+        @media (min-width: 640px) {
+            .gallery { grid-template-columns: repeat(1, 1fr); }
+        }
     </style>
 </head>
 <body>
@@ -184,85 +260,123 @@
 
     <!-- LAYAR AWAL -->
     <div id="welcome-screen">
-        <img src="support.png" class="welcome-logo">
-        <h2 style="color: var(--primary-blue); font-weight: 800; margin-bottom: 5px;">ChBotID</h2>
-        <p style="color: #666; font-size: 0.9rem; margin-bottom: 30px;">Information System Information</p>
-        <button class="btn-open" onclick="startApp()">Buka</button>
+        <div class="welcome-content">
+            <img src="support.png" class="welcome-logo" alt="ChBotID Logo">
+            <h2 style="font-weight: 800; font-size: 2rem; color: var(--text-main); margin-bottom: 8px;">ChBotID</h2>
+            <p style="color: var(--text-muted); margin-bottom: 32px; font-weight: 500;">Official Information System</p>
+            <button class="btn-open" onclick="startApp()">MASUK PENGUMUMAN</button>
+        </div>
     </div>
 
     <!-- KONTEN UTAMA -->
     <div id="main-content">
         <div class="header-section">
-            <h1>Pemenang Season 7</h1>
-            <p style="font-size: 0.9rem; color: #666;">Data Informasi Resmi Sambung Kata</p>
+            <h1>Hall of Fame</h1>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Para Pemenang Season 7 Sambung Kata</p>
         </div>
         
         <div class="gallery">
             <!-- Juara 1 -->
-            <div class="card">
-                <img src="idol1.png" onclick="openPreview('idol1.png')">
+            <div class="card" onclick="openPreview('idol1.png')">
+                <img src="idol1.png" loading="lazy">
                 <div class="caption">
-                    Juara 1 Season7 Sambung Kata: <a href="https://t.me/runarubyluna" target="_blank">RUNA</a>
+                    <span class="rank-badge rank-1">🏆 Juara 1</span>
+                    <a href="https://t.me/runarubyluna" class="winner-name" target="_blank">
+                        RUNA <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                    </a>
                 </div>
             </div>
 
             <!-- Juara 2 -->
-            <div class="card">
-                <img src="idol2.png" onclick="openPreview('idol2.png')">
+            <div class="card" onclick="openPreview('idol2.png')">
+                <img src="idol2.png" loading="lazy">
                 <div class="caption">
-                    Juara 2 Season7 Sambung Kata: <a href="https://t.me/blupublupuup" target="_blank">BLUP</a>
+                    <span class="rank-badge rank-2">🥈 Juara 2</span>
+                    <a href="https://t.me/blupublupuup" class="winner-name" target="_blank">
+                        BLUP <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                    </a>
                 </div>
             </div>
 
             <!-- Juara 3 -->
-            <div class="card">
-                <img src="idol3.png" onclick="openPreview('idol3.png')">
+            <div class="card" onclick="openPreview('idol3.png')">
+                <img src="idol3.png" loading="lazy">
                 <div class="caption">
-                    Juara 3 Season7 Sambung Kata: <a href="https://t.me/luvv_naa" target="_blank">NAAA</a>
+                    <span class="rank-badge rank-3">🥉 Juara 3</span>
+                    <a href="https://t.me/luvv_naa" class="winner-name" target="_blank">
+                        NAAA <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                    </a>
                 </div>
             </div>
         </div>
 
-        <img src="support.png" class="footer-logo">
-        <p style="font-size: 0.75rem; color: #999; margin: 20px 0 50px 0;">&copy; 2024 ChBotID Information System</p>
+        <footer>
+            <img src="support.png" style="width: 60px; margin-bottom: 15px; opacity: 0.8;">
+            <p style="font-size: 0.85rem; font-weight: 600;">&copy; 2024 ChBotID Information System</p>
+        </footer>
     </div>
 
     <!-- MODAL PREVIEW -->
     <div id="imageModal" onclick="closePreview()">
         <img id="modalImg" src="">
-        <!-- Tombol Download ke Link Telegram -->
-        <a href="https://t.me/ChBotID/311?single" target="_blank" class="download-btn" onclick="event.stopPropagation()">
-            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-        </a>
+        <div class="modal-actions">
+            <!-- Tombol Tutup -->
+            <button class="action-btn" onclick="closePreview()">
+                <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+            </button>
+            <!-- Tombol Telegram -->
+            <a href="https://t.me/ChBotID/311?single" target="_blank" class="action-btn" onclick="event.stopPropagation()">
+                <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            </a>
+        </div>
     </div>
 
     <script>
         function startApp() {
-            var music = document.getElementById('bgMusic');
-            music.play().catch(e => console.log("Music blocked"));
+            const music = document.getElementById('bgMusic');
+            music.play().catch(e => console.log("Music play blocked by browser"));
 
-            document.getElementById('welcome-screen').classList.add('fade-out');
+            const welcome = document.getElementById('welcome-screen');
+            welcome.classList.add('fade-out');
+            
             setTimeout(() => {
-                document.getElementById('welcome-screen').style.display = 'none';
-                var main = document.getElementById('main-content');
-                main.style.display = 'block';
-                setTimeout(() => { main.style.opacity = '1'; }, 50);
+                welcome.style.display = 'none';
+                const main = document.getElementById('main-content');
+                main.classList.add('show-content');
             }, 800);
         }
 
         function openPreview(src) {
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImg');
+            
             modalImg.src = src;
             modal.style.display = 'flex';
-            setTimeout(() => { modalImg.style.transform = 'scale(1)'; }, 50);
+            
+            // Trigger animation
+            setTimeout(() => {
+                modal.style.opacity = '1';
+                modalImg.style.transform = 'scale(1)';
+            }, 10);
         }
 
         function closePreview() {
+            const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImg');
-            modalImg.style.transform = 'scale(0.9)';
-            setTimeout(() => { document.getElementById('imageModal').style.display = 'none'; }, 300);
+            
+            modal.style.opacity = '0';
+            modalImg.style.transform = 'scale(0.8)';
+            
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
         }
+
+        // Animasi klik tambahan untuk efek bounce pada kartu
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousedown', () => card.style.transform = 'scale(0.95)');
+            card.addEventListener('mouseup', () => card.style.transform = 'translateY(-10px) scale(1)');
+        });
     </script>
 </body>
 </html>
