@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChBotID - Pengumuman Resmi Season 7</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #004e92;
+            --light-blue: #0088cc;
+            --text-dark: #1a1a2e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            /* Pola Corak Mega Mendung (SVG Pattern) */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200' viewBox='0 0 400 200'%3E%3Cpath d='M0 100 Q50 50 100 100 T200 100 T300 100 T400 100' fill='none' stroke='%230088cc' stroke-width='1' opacity='0.1'/%3E%3Cpath d='M0 120 Q50 70 100 120 T200 120 T300 120 T400 120' fill='none' stroke='%230088cc' stroke-width='1' opacity='0.05'/%3E%3C/svg%3E");
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* --- LAYAR AWAL (WELCOME) --- */
+        #welcome-screen {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            background: white;
+            transition: opacity 0.8s ease;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .btn-open {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px 50px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 78, 146, 0.3);
+        }
+
+        .btn-open:hover { background: var(--light-blue); transform: translateY(-2px); }
+
+        /* --- KONTEN UTAMA --- */
+        #main-content {
+            display: none;
+            opacity: 0;
+            width: 100%;
+            max-width: 650px;
+            padding: 50px 20px;
+            transition: opacity 1s ease;
+        }
+
+        .header-section {
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 { font-size: 1.8rem; font-weight: 800; color: var(--primary-blue); }
+
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 5px;
+            cursor: zoom-in;
+            transition: 0.4s;
+        }
+
+        .card img:hover { opacity: 0.9; }
+
+        .caption {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: #444;
+            padding: 5px;
+        }
+
+        .caption a {
+            color: var(--light-blue);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .caption a:hover { text-decoration: underline; }
+
+        /* --- MODAL PREVIEW --- */
+        #imageModal {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        #modalImg {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            transform: scale(0.9);
+            transition: 0.3s;
+        }
+
+        /* Tombol Unduh (Kecil & Simbol Saja) */
+        .download-btn {
+            margin-top: 20px;
+            background: var(--primary-blue);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .download-btn:hover { background: var(--light-blue); transform: scale(1.1); }
+        .download-btn svg { width: 22px; height: 22px; fill: white; }
+
+        .footer-logo {
+            margin-top: 60px;
+            width: 100px;
+            opacity: 0.7;
+        }
+
+        .fade-out { opacity: 0 !important; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop><source src="music.mp3" type="audio/mpeg"></audio>
+
+    <!-- LAYAR AWAL -->
+    <div id="welcome-screen">
+        <img src="support.png" class="welcome-logo">
+        <h2 style="color: var(--primary-blue); font-weight: 800; margin-bottom: 5px;">ChBotID</h2>
+        <p style="color: #666; font-size: 0.9rem; margin-bottom: 30px;">Information System Information</p>
+        <button class="btn-open" onclick="startApp()">Buka</button>
+    </div>
+
+    <!-- KONTEN UTAMA -->
+    <div id="main-content">
+        <div class="header-section">
+            <h1>Pemenang Season 7</h1>
+            <p style="font-size: 0.9rem; color: #666;">Data Informasi Resmi Sambung Kata</p>
+        </div>
+        
+        <div class="gallery">
+            <!-- Juara 1 -->
+            <div class="card">
+                <img src="idol1.png" onclick="openPreview('idol1.png')">
+                <div class="caption">
+                    Juara 1 Season7 Sambung Kata: <a href="https://t.me/runarubyluna" target="_blank">RUNA</a>
+                </div>
+            </div>
+
+            <!-- Juara 2 -->
+            <div class="card">
+                <img src="idol2.png" onclick="openPreview('idol2.png')">
+                <div class="caption">
+                    Juara 2 Season7 Sambung Kata: <a href="https://t.me/blupublupuup" target="_blank">BLUP</a>
+                </div>
+            </div>
+
+            <!-- Juara 3 -->
+            <div class="card">
+                <img src="idol3.png" onclick="openPreview('idol3.png')">
+                <div class="caption">
+                    Juara 3 Season7 Sambung Kata: <a href="https://t.me/luvv_naa" target="_blank">NAAA</a>
+                </div>
+            </div>
+        </div>
+
+        <img src="support.png" class="footer-logo">
+        <p style="font-size: 0.75rem; color: #999; margin: 20px 0 50px 0;">&copy; 2024 ChBotID Information System</p>
+    </div>
+
+    <!-- MODAL PREVIEW -->
+    <div id="imageModal" onclick="closePreview()">
+        <img id="modalImg" src="">
+        <!-- Tombol Download ke Link Telegram -->
+        <a href="https://t.me/ChBotID/311?single" target="_blank" class="download-btn" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        </a>
+    </div>
+
+    <script>
+        function startApp() {
+            var music = document.getElementById('bgMusic');
+            music.play().catch(e => console.log("Music blocked"));
+
+            document.getElementById('welcome-screen').classList.add('fade-out');
+            setTimeout(() => {
+                document.getElementById('welcome-screen').style.display = 'none';
+                var main = document.getElementById('main-content');
+                main.style.display = 'block';
+                setTimeout(() => { main.style.opacity = '1'; }, 50);
+            }, 800);
+        }
+
+        function openPreview(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            modalImg.src = src;
+            modal.style.display = 'flex';
+            setTimeout(() => { modalImg.style.transform = 'scale(1)'; }, 50);
+        }
+
+        function closePreview() {
+            const modalImg = document.getElementById('modalImg');
+            modalImg.style.transform = 'scale(0.9)';
+            setTimeout(() => { document.getElementById('imageModal').style.display = 'none'; }, 300);
+        }
+    </script>
+</body>
+</html>
